@@ -3,8 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="transparent">#00ffffff</color>
 
-
+    <color name="douban_green_80_percent">#ff68cb78</color>
     <color name="green_50">#d0f8ce</color>
     <color name="green_100">#a3e9a4</color>
     <color name="green_200">#72d572</color>
@@ -40,6 +41,10 @@
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+
+    <color name="column_discount_price_orange">#fff97927</color>
+    <color name="group_edit_notice_orange">#80fa5b08</color>
+    <color name="notice_orange">#ffff8852</color>
 
 
 
