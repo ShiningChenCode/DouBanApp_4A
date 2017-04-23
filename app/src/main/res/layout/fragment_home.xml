@@ -1,7 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.teamwork.doubanapp_4a.home.view.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -41,5 +43,85 @@
                 />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swiperefreshlayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+            <ScrollView
+                android:id="@+id/slv_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
 
+                    >
+                    <include layout="@layout/head_banner_home"/>
+
+                   <LinearLayout
+                       android:id="@+id/ll_hot_home"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:background="@color/white"
+                       android:orientation="vertical"
+                       >
+                       <include layout="@layout/head_hot_home"/>
+                       <include layout="@layout/item_vertical_home"/>
+                       <View
+                           android:layout_width="match_parent"
+                           android:layout_height="1px"
+                           android:layout_marginBottom="10dp"
+                           android:background="@color/grey_500"/>
+                       <include layout="@layout/item_vertical_home"/>
+                       </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@color/grey_200"
+                        android:orientation="vertical"
+                        >
+                        <include layout="@layout/head_time_home"/>
+                        <HorizontalScrollView
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:scrollbars="none"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:orientation="horizontal"
+                                >
+                                <include layout="@layout/item_horizontal_home"/>
+                                <include layout="@layout/item_horizontal_home"/>
+                                <include layout="@layout/item_horizontal_home"/>
+                                <include layout="@layout/item_horizontal_home"/>
+                                </LinearLayout>
+                            </HorizontalScrollView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_recommond_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        >
+                        <include layout="@layout/head_hot_home"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:foregroundGravity="center"
+                            android:nestedScrollingEnabled="false"
+                            />
+                    </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
