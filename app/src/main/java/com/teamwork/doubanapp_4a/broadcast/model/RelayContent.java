@@ -5,6 +5,10 @@ package com.teamwork.doubanapp_4a.broadcast.model;
  */
 
 public class RelayContent {
+    User user;
+    String content;
+    long time;
+
 
 
 }

@@ -3,7 +3,6 @@ package com.teamwork.doubanapp_4a.broadcast.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,10 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.BroadcastContent;
-import com.teamwork.doubanapp_4a.broadcast.model.User;
+import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
+import com.teamwork.doubanapp_4a.broadcast.utils.FileUtil;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.DBHelper;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         mContext = getContext();
         initViews(view);
         bindListener();
+        initDB();
 
         toolbar.setTitle("");
         //Fragment中设置ToolBar
@@ -68,6 +71,13 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
         initRecyclerView();
         return view;
+    }
+
+    private void initDB() {
+        //实例化我们的DBHelper
+        DBHelper dbHelper = new DBHelper(mContext);
+        //调用了这个方法后，DBHelper中的onCreate才会执行
+        dbHelper.getReadableDatabase();
     }
 
 
@@ -95,14 +105,9 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initRecyclerView() {
-        List<BroadcastContent> mDatas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            BroadcastContent broadcastContent = new BroadcastContent();
-            User user = new User();
-            user.setUserName("user" + i);
-            broadcastContent.setUser(user);
-            mDatas.add(broadcastContent);
-        }
+        BroadcastsBean broadcastsBean= new Gson().fromJson(FileUtil.readAssertResource(getActivity(), "broadcast.txt"), BroadcastsBean.class);
+        List<BroadcastsBean.ItemsBean> mDatas = new ArrayList<>();
+        mDatas = broadcastsBean.getItems();
         layoutManager = new LinearLayoutManager(mContext);
 
         //设置为垂直布局，这也是默认的
