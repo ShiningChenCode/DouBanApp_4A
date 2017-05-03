@@ -1,0 +1,283 @@
+{
+  "count": 6,
+  "start": 0,
+  "total": 1084,
+  "items": [
+    {
+      "original_price": null,
+      "rating": {
+        "count": 368,
+        "max": 10,
+        "value": 7.6
+      },
+      "actions": [
+
+      ],
+      "reason_data": {
+
+      },
+      "id": "25840012",
+      "recommended_reason": "",
+      "title": "莎士比亚外传",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "马修·贝恩顿",
+        "西蒙·法纳比",
+        "玛莎·豪-道格拉斯"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "理查德·布雷斯韦尔\/马修·贝恩顿\/西蒙·法纳比\/玛莎·豪-道格拉斯\/喜剧\/传记\/历史\/2015-09-18(英国)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/25840012\/",
+      "release_date": "09.18",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2452232205.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 463,
+        "shape": "rectangle",
+        "height": 679
+      },
+      "uri": "douban:\/\/douban.com\/movie\/25840012",
+      "subtype": "",
+      "directors": [
+        "理查德·布雷斯韦尔"
+      ],
+      "reviewer_name": ""
+    },
+    {
+      "original_price": null,
+      "rating": {
+        "count": 373,
+        "max": 10,
+        "value": 5.4
+      },
+      "actions": [
+
+      ],
+      "reason_data": {
+
+      },
+      "id": "26430516",
+      "recommended_reason": "",
+      "title": "劫数",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "阿诺·施瓦辛格",
+        "汉娜·韦尔",
+        "凯文·席格斯"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "艾略特·莱斯特\/阿诺·施瓦辛格\/汉娜·韦尔\/凯文·席格斯\/剧情\/惊悚\/2017-04-07(美国)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/26430516\/",
+      "release_date": "04.07",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2425652342.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 1200,
+        "shape": "rectangle",
+        "height": 1850
+      },
+      "uri": "douban:\/\/douban.com\/movie\/26430516",
+      "subtype": "",
+      "directors": [
+        "艾略特·莱斯特"
+      ],
+      "reviewer_name": ""
+    },
+    {
+      "original_price": null,
+      "rating": {
+        "count": 514,
+        "max": 10,
+        "value": 6.6
+      },
+      "actions": [
+
+      ],
+      "reason_data": {
+
+      },
+      "id": "26607046",
+      "recommended_reason": "",
+      "title": "早安秀",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "中井贵一",
+        "长泽雅美",
+        "志田未来"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "君塚良一\/中井贵一\/长泽雅美\/志田未来\/喜剧\/2016-10-08(日本)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/26607046\/",
+      "release_date": "10.08",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2408009884.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 1352,
+        "shape": "rectangle",
+        "height": 1920
+      },
+      "uri": "douban:\/\/douban.com\/movie\/26607046",
+      "subtype": "",
+      "directors": [
+        "君塚良一"
+      ],
+      "reviewer_name": ""
+    },
+    {
+      "original_price": null,
+      "rating": {
+        "count": 806,
+        "max": 10,
+        "value": 7.5
+      },
+      "actions": [
+        "可播放"
+      ],
+      "reason_data": {
+
+      },
+      "id": "26421442",
+      "recommended_reason": "",
+      "title": "滚烫的爱",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "宫泽理惠",
+        "杉咲花",
+        "小田切让"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "中野量太\/宫泽理惠\/杉咲花\/小田切让\/喜剧\/2016-10-07(釜山电影节)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/26421442\/",
+      "release_date": "10.07",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2370019558.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 564,
+        "shape": "rectangle",
+        "height": 800
+      },
+      "uri": "douban:\/\/douban.com\/movie\/26421442",
+      "subtype": "",
+      "directors": [
+        "中野量太"
+      ],
+      "reviewer_name": ""
+    },
+    {
+      "original_price": null,
+      "rating": {
+        "count": 1399,
+        "max": 10,
+        "value": 7
+      },
+      "actions": [
+
+      ],
+      "reason_data": {
+
+      },
+      "id": "26718282",
+      "recommended_reason": "",
+      "title": "独自在夜晚的海边",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "金敏喜",
+        "徐永嬅",
+        "郑在咏"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "洪尚秀\/金敏喜\/徐永嬅\/郑在咏\/剧情\/2017-02-16(柏林电影节)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/26718282\/",
+      "release_date": "02.16",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2443574154.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 1500,
+        "shape": "rectangle",
+        "height": 2141
+      },
+      "uri": "douban:\/\/douban.com\/movie\/26718282",
+      "subtype": "",
+      "directors": [
+        "洪尚秀"
+      ],
+      "reviewer_name": ""
+    },
+    {
+      "original_price": null,
+      "rating": {
+        "count": 11613,
+        "max": 10,
+        "value": 7
+      },
+      "actions": [
+
+      ],
+      "reason_data": {
+
+      },
+      "id": "26748673",
+      "recommended_reason": "",
+      "title": "拆弹专家",
+      "recom_data": {
+
+      },
+      "label": null,
+      "actors": [
+        "刘德华",
+        "姜武",
+        "宋佳"
+      ],
+      "short_recommended_reason": "",
+      "type": "movie",
+      "description": "",
+      "price": null,
+      "date": null,
+      "info": "邱礼涛\/刘德华\/姜武\/宋佳\/动作\/犯罪\/悬疑\/2017-04-28(中国大陆)",
+      "url": "https:\/\/www.douban.com\/doubanapp\/dispatch?uri=\/movie\/26748673\/",
+      "release_date": "04.28",
+      "cover": {
+        "url": "https:\/\/qnmob2.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2454868217.jpg?imageView2\/0\/q\/80\/w\/9999\/h\/200\/format\/webp",
+        "width": 857,
+        "shape": "rectangle",
+        "height": 1200
+      },
+      "uri": "douban:\/\/douban.com\/movie\/26748673",
+      "subtype": "",
+      "directors": [
+        "邱礼涛"
+      ],
+      "reviewer_name": ""
+    }
+  ]
+}

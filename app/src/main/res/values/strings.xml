@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">DouBanApp_4A</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_search_hint">影视 图书 唱片 小组 舞台剧等</string>
+    <string name="movie">电影</string>
+    <string name="read">读书</string>
+    <string name="tv">电视</string>
+    <string name="city">同城</string>
+    <string name="music">音乐</string>
+    <string name="search">搜索</string>
+    <string name="chat">聊天</string>
+    <string name="book_media_video">书影音</string>
+    <string name="more">更多</string>
+
+    <string-array name="bbm_tab_title">
+        <item>@string/movie</item>
+        <item>@string/read</item>
+        <item>@string/tv</item>
+        <item>@string/city</item>
+        <item>@string/music</item>
+    </string-array>
+</resources>
