@@ -23,7 +23,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".group.view.activity.RecommandActivity">
-
+        </activity>
+        <activity android:name=".group.view.activity.DetailActivity">
+        </activity>
+        <activity android:name=".group.view.activity.NewEstTopicActivity">
+        </activity>
+        <activity android:name=".group.view.activity.PublishActivity">
+        </activity>
+        <activity android:name=".group.view.activity.ResponseActivity">
+        </activity>
+        <activity android:name=".group.view.activity.RecentlyBrowseActivity">
         </activity>
     </application>
 

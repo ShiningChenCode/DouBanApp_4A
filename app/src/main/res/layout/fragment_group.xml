@@ -43,12 +43,20 @@
             android:layout_alignParentBottom="true"
             android:background="#d6d8da"></View>
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           >
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative"
         android:background="#ffffff"
         >
 
@@ -197,7 +205,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/grouptext"
-        android:padding="10dp"
         android:background="#fff"
         >
 
@@ -205,7 +212,9 @@
             android:id="@+id/often"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:text="我常去的"
             android:textColor="#000000"
             />
@@ -219,39 +228,26 @@
             android:background="#cbcdce"
             ></View>
 
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/oftenrecycleview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view1"
-            android:padding="5dp">
+            >
+        </android.support.v7.widget.RecyclerView>
 
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/img"
-                android:text="大话西游"
-                />
-        </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relative2"
         android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="5dp">
         <TextView
             android:id="@+id/more"
             android:layout_width="wrap_content"
@@ -268,7 +264,8 @@
             android:text="去看看"
             android:background="#3ad422"
             android:textColor="#ffffff"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -313,9 +310,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             >
         </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

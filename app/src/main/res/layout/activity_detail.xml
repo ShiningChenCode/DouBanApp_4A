@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.teamwork.doubanapp_4a.group.view.activity.DetailActivity">
+    <RelativeLayout
+        android:id="@+id/titlelayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#fff">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_bar_back_green"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11111111"
+            android:maxLines="1"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/back"
+            android:layout_toLeftOf="@+id/share"
+            android:textSize="15dp"
+            android:textColor="#000"/>
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_action_share_green"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/overflow"
+            android:layout_marginRight="5dp"
+            />
+        <ImageView
+            android:id="@+id/overflow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_action_overflow_icon_green"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titlelayout"
+        />
+    <ImageView
+        android:id="@+id/loadImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/progress_view"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>

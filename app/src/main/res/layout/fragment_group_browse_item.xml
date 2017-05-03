@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12345678979"/>
+        <ImageView
+            android:id="@+id/contentImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher"
+            android:layout_below="@+id/title_text"/>
+        <TextView
+            android:id="@+id/author_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12345678979"
+            android:layout_toRightOf="@+id/contentImg"
+            android:layout_alignBottom="@+id/contentImg"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"/>
+        <ImageView
+            android:id="@+id/moreImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/threepoints"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/contentImg"
+            android:layout_marginRight="15dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
