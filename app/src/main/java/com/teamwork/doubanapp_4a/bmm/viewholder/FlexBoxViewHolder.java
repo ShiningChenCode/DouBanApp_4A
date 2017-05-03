@@ -71,19 +71,16 @@ public class FlexBoxViewHolder extends RecyclerView.ViewHolder {
                 String name = flexData.get(position).get(i);
                 TextView textView = new TextView(context);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                if (i != 0) {
-                    layoutParams.leftMargin = DensityUtil.dp2px(context, 10);
-//                }
+                layoutParams.setMargins(DensityUtil.dp2px(context, 10), 0, 0, 0);
                 textView.setPadding(DensityUtil.dp2px(context, 10), DensityUtil.dp2px(context, 10), DensityUtil.dp2px(context, 10), DensityUtil.dp2px(context, 10));
-                textView.setLayoutParams(layoutParams);
                 textView.setText(name);
+                textView.setLayoutParams(layoutParams);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     textView.setTextColor(context.getResources().getColor(R.color.green_400, null));
                 } else {
                     textView.setTextColor(context.getResources().getColor(R.color.green_400));
                 }
                 textView.setBackgroundResource(R.drawable.flex_tv_bg);
-                FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(layoutParams);
                 viewHolder.flexboxLayout.addView(textView);
             }
         }
