@@ -1,29 +1,35 @@
 package com.teamwork.doubanapp_4a.broadcast.model;
 
 /**
- * 豆瓣用户信息
+ * 赞
  */
 
 public class User {
+    int id;
+    String icon_url;
+    String name;
 
-    int icon;
-    String userName;
-
-    public String getUserName() {
-        return userName;
+    public int getId() {
+        return id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getIcon() {
-        return icon;
+    public String getIcon_url() {
+        return icon_url;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

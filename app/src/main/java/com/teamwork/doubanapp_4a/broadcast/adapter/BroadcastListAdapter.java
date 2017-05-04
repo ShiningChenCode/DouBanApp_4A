@@ -2,7 +2,6 @@ package com.teamwork.doubanapp_4a.broadcast.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.GlideRoundTransform;
-import com.teamwork.doubanapp_4a.broadcast.model.BroadcastContent;
+import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
+import com.teamwork.doubanapp_4a.broadcast.model.Comment;
+import com.teamwork.doubanapp_4a.broadcast.model.Like;
+import com.teamwork.doubanapp_4a.broadcast.model.User;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
+import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,11 +31,16 @@ import java.util.List;
 
 public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdapter.MyViewHolder> {
 
-    private List<BroadcastsBean.ItemsBean> mDatas;
+    private static SimpleDateFormat DATE_FORMAT_YEAR = new SimpleDateFormat(
+            "yyyy年M月d日");
+    private static SimpleDateFormat DATE_FORMAT_MONTH = new SimpleDateFormat(
+            "M月d日");
+
+    private List<Broadcast> mDatas;
     private Context mContext;
     private LayoutInflater inflater;
 
-    public BroadcastListAdapter(Context context, List<BroadcastsBean.ItemsBean> datas) {
+    public BroadcastListAdapter(Context context, List<Broadcast> datas) {
         this.mContext = context;
         this.mDatas = datas;
         inflater = LayoutInflater.from(mContext);
@@ -45,40 +56,102 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         LogUtil.d("mDatas:", mDatas.size() + "");
+        holder.tvContent.setText(mDatas.get(position).getContent());
+        final BroadcastDataHelper broadcastDataHelper = new BroadcastDataHelper(mContext);
+        final Broadcast broadcast = mDatas.get(position);
+        final User user = broadcastDataHelper.getUser(broadcast.getUser_id());
+        final List<Like> likes = broadcastDataHelper.getLikes(broadcast.getId());
 
-        BroadcastsBean.ItemsBean.StatusBean status = mDatas.get(position).getStatus();
+        List<Comment> comments = broadcastDataHelper.getComments(broadcast.getId());
+        holder.tvAuthorName.setText(user.getName());
+        Glide.with(mContext).load(user.getIcon_url()).transform(new GlideRoundTransform(mContext, 30)).into(holder.ivAuthorAvatar);
 
-        //如果是转播的
-        if (status != null) {
-            Glide.with(mContext).load(status.getAuthor().getAvatar()).transform(new GlideRoundTransform(mContext,30)).into(holder.ivAuthorAvatar);
-            holder.tvAuthorName.setText(status.getAuthor().getName());
-            holder.tvContent.setText(status.getText());
-            holder.tvLikeCount.setText(String.valueOf(status.getLike_count()));
-            holder.tvCommentCount.setText(String.valueOf(status.getComments_count()));
+        holder.tvReleaseTime.setText(showReleaseTime(broadcast.getTime()));
 
-            List<BroadcastsBean.ItemsBean.CommentsBean> listComment = mDatas.get(position).getComments();
-            if (listComment.size() == 0) {
-                holder.llComment.setVisibility(View.GONE);
-            }
-            if (listComment.size() == 1) {
-                holder.llComment2.setVisibility(View.GONE);
-                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
-                holder.tvCommnetContent1.setText(listComment.get(0).getText());
-            }
-            if (listComment.size() >= 2) {
-                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
-                holder.tvCommnetContent1.setText(listComment.get(0).getText());
-                holder.tvCommentAuthor2.setText(listComment.get(1).getAuthor().getName());
-                holder.tvCommnetContent2.setText(listComment.get(1).getText());
-            }
-        } else {
-            holder.llBroadcast.setVisibility(View.GONE);
-            //热门推荐
+        holder.tvLikeCount.setText(String.valueOf(likes.size()));
+        holder.tvCommentCount.setText(String.valueOf(comments.size()));
+        if (comments.size() == 0) {
+            holder.llComment.setVisibility(View.GONE);
+        }
+        if (comments.size() == 1) {
+            holder.llComment2.setVisibility(View.GONE);
+
+            holder.tvCommentAuthor1.setText(broadcastDataHelper.getUser(comments.get(0).getUser_id()).getName());
+            holder.tvCommnetContent1.setText(comments.get(0).getContent());
+        }
+        if (comments.size() >= 2) {
+            holder.tvCommentAuthor1.setText(broadcastDataHelper.getUser(comments.get(0).getUser_id()).getName());
+            holder.tvCommnetContent1.setText(comments.get(0).getContent());
+            holder.tvCommentAuthor2.setText(broadcastDataHelper.getUser(comments.get(1).getUser_id()).getName());
+            holder.tvCommnetContent2.setText(comments.get(1).getContent());
         }
 
+        holder.llLikeCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                broadcastDataHelper.setLike(broadcast.getId(), user.getId());
+                holder.tvLikeCount.setText(String.valueOf(broadcastDataHelper.getLikes(broadcast.getId()).size()));
 
+            }
+        });
+
+        holder.llCommentCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showShort(mContext, "广播详细页面");
+            }
+        });
+
+//        BroadcastsBean.ItemsBean.StatusBean status = mDatas.get(position).getStatus();
+//
+//        //如果是转播的
+//        if (status != null) {
+//            Glide.with(mContext).load(status.getAuthor().getAvatar()).transform(new GlideRoundTransform(mContext,30)).into(holder.ivAuthorAvatar);
+//            holder.tvAuthorName.setText(status.getAuthor().getName());
+//            holder.tvContent.setText(status.getText());
+//            holder.tvLikeCount.setText(String.valueOf(status.getLike_count()));
+//            holder.tvCommentCount.setText(String.valueOf(status.getComments_count()));
+//
+//            List<BroadcastsBean.ItemsBean.CommentsBean> listComment = mDatas.get(position).getComments();
+//            if (listComment.size() == 0) {
+//                holder.llComment.setVisibility(View.GONE);
+//            }
+//            if (listComment.size() == 1) {
+//                holder.llComment2.setVisibility(View.GONE);
+//                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
+//                holder.tvCommnetContent1.setText(listComment.get(0).getText());
+//            }
+//            if (listComment.size() >= 2) {
+//                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
+//                holder.tvCommnetContent1.setText(listComment.get(0).getText());
+//                holder.tvCommentAuthor2.setText(listComment.get(1).getAuthor().getName());
+//                holder.tvCommnetContent2.setText(listComment.get(1).getText());
+//            }
+//        } else {
+//            holder.llBroadcast.setVisibility(View.GONE);
+//            //热门推荐
+//        }
+
+
+    }
+
+    private String showReleaseTime(long time) {
+        long now = System.currentTimeMillis();
+        long interval = (now - time) / 1000;
+//
+        if (interval > 0 && interval < 60) { // 1小时内
+            return interval + "秒前";
+        } else if (interval > 60 && interval < 3600) {
+            return interval / 60 + "分钟前";
+        } else if (interval >= 3600 && interval < 3600 * 24) {
+            return interval / 3600 + "小时前";
+        }  else if (new Date(now).getYear() == new Date(time).getYear()) {
+            return DATE_FORMAT_MONTH.format(new Date(time));
+        }
+
+        return DATE_FORMAT_YEAR.format(new Date(time));
     }
 
     @Override
@@ -90,15 +163,17 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout llBroadcast, llComment, llComment2;
-        TextView tvAuthorName, tvContent, tvCommentAuthor1, tvCommnetContent1, tvCommentAuthor2, tvCommnetContent2, tvLikeCount, tvCommentCount;
-        ImageView ivAuthorAvatar;
+        LinearLayout llBroadcast, llComment, llComment2, llLikeCount, llCommentCount;
+        TextView tvAuthorName, tvContent, tvCommentAuthor1, tvCommnetContent1, tvCommentAuthor2, tvCommnetContent2, tvLikeCount, tvCommentCount, tvReleaseTime;
+        ImageView ivAuthorAvatar, ivLikeCount;
 
         public MyViewHolder(View view) {
             super(view);
             llBroadcast = (LinearLayout) view.findViewById(R.id.ll_broadcast);
             llComment = (LinearLayout) view.findViewById(R.id.ll_comment);
             llComment2 = (LinearLayout) view.findViewById(R.id.ll_comment2);
+            llLikeCount = (LinearLayout) view.findViewById(R.id.ll_like_count);
+            llCommentCount = (LinearLayout) view.findViewById(R.id.ll_comment_count);
 
             tvAuthorName = (TextView) view.findViewById(R.id.tv_author_name);
             tvContent = (TextView) view.findViewById(R.id.tv_content);
@@ -108,8 +183,11 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
             tvCommnetContent2 = (TextView) view.findViewById(R.id.tv_comment_content2);
             tvLikeCount = (TextView) view.findViewById(R.id.tv_like_count);
             tvCommentCount = (TextView) view.findViewById(R.id.tv_comment_count);
+            tvReleaseTime = (TextView) view.findViewById(R.id.tv_release_time);
+
 
             ivAuthorAvatar = (ImageView) view.findViewById(R.id.iv_author_avatar);
+            ivLikeCount = (ImageView) view.findViewById(R.id.iv_like_count);
         }
 
     }

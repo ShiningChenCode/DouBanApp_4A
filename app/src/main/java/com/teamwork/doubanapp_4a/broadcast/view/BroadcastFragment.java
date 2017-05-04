@@ -1,7 +1,9 @@
 package com.teamwork.doubanapp_4a.broadcast.view;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,10 +25,12 @@ import android.widget.ScrollView;
 import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
-import com.teamwork.doubanapp_4a.broadcast.model.BroadcastContent;
+import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
 import com.teamwork.doubanapp_4a.broadcast.utils.FileUtil;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.DBHelper;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.SqliteHelper;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ import java.util.List;
  * 广播界面
  */
 public class BroadcastFragment extends Fragment implements View.OnClickListener {
+
     Context mContext;
     Toolbar toolbar;
     ImageView ivSearchUser, ivChat, ivCapturePhotos;
@@ -46,8 +51,10 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     LinearLayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     ScrollView scrollView;
+    List<Broadcast> mDatas;
 
     int lastVisibleItem;
+
 
     public BroadcastFragment() {
         // Required empty public constructor
@@ -75,7 +82,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
     private void initDB() {
         //实例化我们的DBHelper
-        DBHelper dbHelper = new DBHelper(mContext);
+        SqliteHelper dbHelper = new SqliteHelper(mContext);
         //调用了这个方法后，DBHelper中的onCreate才会执行
         dbHelper.getReadableDatabase();
     }
@@ -105,9 +112,10 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initRecyclerView() {
-        BroadcastsBean broadcastsBean= new Gson().fromJson(FileUtil.readAssertResource(getActivity(), "broadcast.txt"), BroadcastsBean.class);
-        List<BroadcastsBean.ItemsBean> mDatas = new ArrayList<>();
-        mDatas = broadcastsBean.getItems();
+        BroadcastsBean broadcastsBean = new Gson().fromJson(FileUtil.readAssertResource(getActivity(), "broadcast.txt"), BroadcastsBean.class);
+
+        mDatas = new ArrayList<>();
+        mDatas = new BroadcastDataHelper(mContext).getBroadcasts();
         layoutManager = new LinearLayoutManager(mContext);
 
         //设置为垂直布局，这也是默认的
@@ -121,8 +129,13 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 ToastUtil.showShort(mContext, "下拉刷新");
+
                 swiperefresh.setRefreshing(false);
+                mDatas.clear();
+                mDatas.addAll(new BroadcastDataHelper(mContext).getBroadcasts());
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -158,6 +171,11 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -170,6 +188,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.ll_send_broadcast:
                 ToastUtil.showShort(mContext, "发送广播");
+                IntentUtil.showIntent((Activity) mContext, SendBroadcastActivity.class);
                 break;
             case R.id.iv_capture_photos:
                 ToastUtil.showShort(mContext, "添加照片");
