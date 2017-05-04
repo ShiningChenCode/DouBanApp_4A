@@ -39,10 +39,10 @@ public class BroadcastDataHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Broadcast broadcast = new Broadcast();
-            broadcast.setId(cursor.getInt(0));
-            broadcast.setUser_id(cursor.getInt(3));
-            broadcast.setContent(cursor.getString(1));
-            broadcast.setTime(cursor.getLong(2));
+            broadcast.setId(cursor.getInt(cursor.getColumnIndex("_ID")));
+            broadcast.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+            broadcast.setContent(cursor.getString(cursor.getColumnIndex("content")));
+            broadcast.setTime(cursor.getLong(cursor.getColumnIndex("time")));
 
             broadcasts.add(broadcast);
             cursor.moveToNext();
@@ -58,11 +58,11 @@ public class BroadcastDataHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Comment comment = new Comment();
-            comment.setId(cursor.getInt(0));
-            comment.setBroadcast_id(cursor.getInt(2));
-            comment.setUser_id(cursor.getInt(4));
-            comment.setContent(cursor.getString(1));
-            comment.setTime(cursor.getLong(3));
+            comment.setId(cursor.getInt(cursor.getColumnIndex("_ID")));
+            comment.setBroadcast_id(cursor.getInt(cursor.getColumnIndex("broadcast_id")));
+            comment.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+            comment.setContent(cursor.getString(cursor.getColumnIndex("content")));
+            comment.setTime(cursor.getLong(cursor.getColumnIndex("time")));
 
             comments.add(comment);
             cursor.moveToNext();
@@ -79,10 +79,10 @@ public class BroadcastDataHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Like like = new Like();
-            like.setId(cursor.getInt(0));
-            like.setBroadcast_id(cursor.getInt(1));
-            like.setUser_id(cursor.getInt(3));
-            like.setTime(cursor.getLong(2));
+            like.setId(cursor.getInt(cursor.getColumnIndex("_ID")));
+            like.setBroadcast_id(cursor.getInt(cursor.getColumnIndex("broadcast_id")));
+            like.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+            like.setTime(cursor.getLong(cursor.getColumnIndex("time")));
 
             likes.add(like);
             cursor.moveToNext();
@@ -96,9 +96,9 @@ public class BroadcastDataHelper {
         User user = new User();
         Cursor cursor = db.query("User", null, "_id='" + id + "'", null, null, null, null);
         cursor.moveToFirst();
-        user.setId(cursor.getInt(0));
-        user.setIcon_url(cursor.getString(1));
-        user.setName(cursor.getString(2));
+        user.setId(cursor.getInt(cursor.getColumnIndex("_ID")));
+        user.setIcon_url(cursor.getString(cursor.getColumnIndex("icon_url")));
+        user.setName(cursor.getString(cursor.getColumnIndex("name")));
         cursor.close();
 
         return user;
