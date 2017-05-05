@@ -30,7 +30,7 @@
     <ImageView
         android:id="@+id/iv"
         android:layout_width="100dp"
-        android:layout_height="140dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_movie" />
 
@@ -56,33 +56,9 @@
             android:id="@+id/tv_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="朴树"
             android:textSize="12sp"
-            android:visibility="gone" />
+            android:text="朴树" />
 
-        <TextView
-            android:id="@+id/tv_dateNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2017-4-19"
-            android:textSize="12sp"
-            android:visibility="gone" />
-        <TextView
-            android:id="@+id/tv_sale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="官方售票"
-            android:background="@drawable/bg_round_rect_red"
-            android:textSize="10sp"
-            android:textColor="@color/red"
-            android:visibility="gone" />
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥22.4"
-            android:textSize="12sp"
-            android:visibility="gone" />
         <LinearLayout
             android:id="@+id/ll_rate"
             android:layout_width="match_parent"

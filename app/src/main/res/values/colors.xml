@@ -62,6 +62,8 @@
     <color name="group_edit_notice_orange">#80fa5b08</color>
     <color name="notice_orange">#ffff8852</color>
 
-
+    <color name="orange_400">#E1A01A</color>
+    <color name="orange_100">#44E1A01A</color>
+    <color name="red">#ff0000</color>
 
 </resources>

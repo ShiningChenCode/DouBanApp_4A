@@ -9,9 +9,9 @@ import com.teamwork.doubanapp_4a.bmm.bean.MovieBean;
 import com.teamwork.doubanapp_4a.bmm.bean.MovieSuggestion;
 import com.teamwork.doubanapp_4a.bmm.viewholder.AdViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.BestReviewViewHolder;
-import com.teamwork.doubanapp_4a.bmm.viewholder.FlexBoxViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.ListViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.MovieViewHolder;
+import com.teamwork.doubanapp_4a.bmm.viewholder.RcvTopViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.ShowViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.SuggestionViewHolder;
 
@@ -22,9 +22,9 @@ import java.util.List;
  * Created by admin on 2017/4/23.
  */
 
-public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BooklRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<MovieBean.ModulesBean> modules;
-    public final int TYPE_MOVIE = 0;
+    public final int TYPE_TV_TITLE = 0;
     public final int TYPE_OTHER = 1;
     public final int TYPE_AD = 2;
     public final int TYPE_SHOW = 3;
@@ -33,13 +33,14 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public final int TYPE_BEST_REVIEWS = 6;
     public final int TYPE_FLEX_BOX = 7;
     public final int TYPE_FIND_MOVIE = 8;
+    public final int TYPE_RCV_TOP = 9;
     private MovieSuggestion movieSuggestion;
 
-    public MovieRecyclerAdapter(List<MovieBean.ModulesBean> modules) {
+    public BooklRecyclerAdapter(List<MovieBean.ModulesBean> modules) {
         this.modules = modules;
     }
 
-    public MovieRecyclerAdapter(List<MovieBean.ModulesBean> modules, MovieSuggestion movieSuggestion) {
+    public BooklRecyclerAdapter(List<MovieBean.ModulesBean> modules, MovieSuggestion movieSuggestion) {
         this.modules = modules;
         this.movieSuggestion = movieSuggestion;
     }
@@ -47,7 +48,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
-        if (viewType == TYPE_MOVIE) {
+        if (viewType == TYPE_TV_TITLE) {
             viewHolder = new MovieViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_rcv_with_title, parent, false));
         } else if (viewType == TYPE_AD) {
             viewHolder = new AdViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_ad, parent, false));
@@ -61,9 +62,12 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             viewHolder = new BestReviewViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_rcv_with_title, parent, false));
         } else if (viewType == TYPE_FIND_MOVIE) {
             viewHolder = new BestReviewViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_rcv_with_title, parent, false));
-        } else if (viewType == TYPE_FLEX_BOX) {
-            viewHolder = new FlexBoxViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_rcv_with_title, parent, false));
+        } else if (viewType == TYPE_RCV_TOP) {
+            viewHolder = new RcvTopViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_rcv_iv, parent, false));
         }
+//        else if (viewType == TYPE_FLEX_BOX) {
+//            viewHolder = new FlexBoxViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_rcv_with_title, parent, false));
+//        }
         return viewHolder;
     }
 
@@ -71,25 +75,40 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int type = getItemViewType(position);
         if (holder instanceof MovieViewHolder) {
-            ((MovieViewHolder) holder).bindViewHolder("", modules.get(position));
+            if (position == 0) {
+                ((MovieViewHolder) holder).bindViewHolder("新书速递", modules.get(0));
+
+            } else if (position == 1) {
+                ((MovieViewHolder) holder).bindViewHolder("最受关注的虚拟书籍", modules.get(0));
+            } else if (position == 2) {
+                ((MovieViewHolder) holder).bindViewHolder("最受关注的非虚拟书籍", modules.get(0));
+            } else if (position == 8) {
+                ((MovieViewHolder) holder).bindViewHolder("限时特价电子书", modules.get(0));
+            } else if (position == 9) {
+                ((MovieViewHolder) holder).bindViewHolder("畅销图书榜", modules.get(0));
+            }
+
         } else if (holder instanceof AdViewHolder) {
-            ((AdViewHolder) holder).bindViewHolder(modules.get(position).getData());
+            ((AdViewHolder) holder).bindViewHolder(modules.get(1).getData());
         } else if (holder instanceof ShowViewHolder) {
-            ((ShowViewHolder) holder).bindViewHolder(modules.get(position));
+            ((ShowViewHolder) holder).bindViewHolder(modules.get(2));
         } else if (holder instanceof ListViewHolder) {
-            ((ListViewHolder) holder).bindViewHolder(modules.get(position));
+            ((ListViewHolder) holder).bindViewHolder(modules.get(3));
         } else if (holder instanceof SuggestionViewHolder) {
-            ((SuggestionViewHolder) holder).bindViewHolder(modules.get(position), movieSuggestion.getItems());
+            ((SuggestionViewHolder) holder).bindViewHolder(modules.get(4), movieSuggestion.getItems());
+        } else if (holder instanceof RcvTopViewHolder) {
+            ((RcvTopViewHolder) holder).bindViewHolder("豆瓣书店", modules.get(0), false, true);
         } else if (holder instanceof BestReviewViewHolder) {
             if (type == TYPE_BEST_REVIEWS) {
-                ((BestReviewViewHolder) holder).bindViewHolder("最受欢迎影评");
+                ((BestReviewViewHolder) holder).bindViewHolder("图书资讯", 1);
             } else if (type == TYPE_FIND_MOVIE) {
                 ((BestReviewViewHolder) holder).bindViewHolder("发现好电影", "豆瓣网友制作的电影榜单", false, "带你进入不正常的世界");
             }
 
-        } else if (holder instanceof FlexBoxViewHolder) {
-            ((FlexBoxViewHolder) holder).bindViewHolder(createFlexData());
         }
+//        else if (holder instanceof FlexBoxViewHolder) {
+//            ((FlexBoxViewHolder) holder).bindViewHolder(createFlexData());
+//        }
     }
 
     private List<List<String>> createFlexData() {
@@ -119,28 +138,30 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 13;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return TYPE_MOVIE;
-        } else if (position == 1) {
-            return TYPE_AD;
-        } else if (position == 2) {
-            return TYPE_SHOW;
+        if (position < 3 || position == 8 || position == 9) {
+            return TYPE_TV_TITLE;
         } else if (position == 3) {
-            return TYPE_LIST;
-        } else if (position == 4) {
-            return TYPE_SUGGESTION;
-        } else if (position == 5) {
             return TYPE_BEST_REVIEWS;
-        } else if (position == 6) {
-            return TYPE_FLEX_BOX;
-        } else if (position == 7) {
+        } else if (position == 4 || position == 6) {
+            return TYPE_AD;
+        } else if (position == 5 | position == 7) {
+            return TYPE_RCV_TOP;
+        }else if (position == 10) {
+            return TYPE_SUGGESTION;
+        } else if (position == 11) {
+            return TYPE_BEST_REVIEWS;
+        } else if (position == 12) {
             return TYPE_FIND_MOVIE;
-        } else {
+        }
+//        else if (position == 6) {
+//            return TYPE_FLEX_BOX;
+//        }
+        else {
             return TYPE_OTHER;
         }
     }

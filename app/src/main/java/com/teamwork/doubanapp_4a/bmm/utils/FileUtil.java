@@ -30,7 +30,7 @@ public class FileUtil {
         StringBuilder sb = new StringBuilder();
         String line;
         try {
-            br = new BufferedReader(new InputStreamReader(a_is, "gbk"));
+            br = new BufferedReader(new InputStreamReader(a_is, "utf-8"));
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }

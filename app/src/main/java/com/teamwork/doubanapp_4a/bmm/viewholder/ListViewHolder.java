@@ -1,6 +1,8 @@
 package com.teamwork.doubanapp_4a.bmm.viewholder;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
+import com.teamwork.doubanapp_4a.bmm.adapter.SpaceItemDecoration;
 import com.teamwork.doubanapp_4a.bmm.bean.MovieBean;
+import com.teamwork.doubanapp_4a.bmm.utils.DensityUtil;
 
 import java.util.List;
 
@@ -33,22 +37,31 @@ public class ListViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindViewHolder(MovieBean.ModulesBean modulesBean) {
-        String title = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
+        String title = modulesBean.getData().getTitle();
         tvTitle.setText(title);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context,DensityUtil.dp2px(context,5)),SpaceItemDecoration.LEFT_SPACE));
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSubject_collection_boards().get(0).getItems()));
+        recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSelected_collections()));
+    }
+
+
+    public void bindViewHolder(MovieBean.ModulesBean modulesBean,String title) {
+        tvTitle.setText(title);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context,DensityUtil.dp2px(context,5)),SpaceItemDecoration.LEFT_SPACE));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSelected_collections()));
     }
 
     class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        private List<MovieBean.ModulesBean.DataBean.SubjectCollectionBoardsBean.ItemsBean> itemsBeen;
+        List<MovieBean.ModulesBean.DataBean.SelectedCollectionsBean> dataBean;
 
-        public RecyclerViewAdapter(List<MovieBean.ModulesBean.DataBean.SubjectCollectionBoardsBean.ItemsBean> itemsBeen) {
-            this.itemsBeen = itemsBeen;
+        public RecyclerViewAdapter(List<MovieBean.ModulesBean.DataBean.SelectedCollectionsBean> dataBean) {
+            this.dataBean = dataBean;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_item, parent, false));
+            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bbm_movie_select_list, parent, false));
         }
 
         @Override
@@ -57,23 +70,35 @@ public class ListViewHolder extends RecyclerView.ViewHolder {
             if (holder instanceof ViewHolder) {
                 viewHolder = (ViewHolder) holder;
             }
-            Glide.with(holder.itemView.getContext()).load(itemsBeen.get(position).getCover().getUrl()).into(viewHolder.iv);
-            viewHolder.tvContent.setText(itemsBeen.get(position).getTitle());
+            Glide.with(holder.itemView.getContext()).load(dataBean.get(position).getCovers().get(0)).into(viewHolder.ivLeft);
+            Glide.with(holder.itemView.getContext()).load(dataBean.get(position).getCovers().get(1)).into(viewHolder.ivCenter);
+            Glide.with(holder.itemView.getContext()).load(dataBean.get(position).getCovers().get(2)).into(viewHolder.ivRight);
+            viewHolder.tvContent.setText(dataBean.get(position).getDescription());
+            viewHolder.tvTitle.setText(dataBean.get(position).getName());
+            viewHolder.cardView.setCardBackgroundColor(Color.parseColor(dataBean.get(position).getBackground_color()));
         }
 
         @Override
         public int getItemCount() {
-            return null == itemsBeen ? 0 : itemsBeen.size();
+            return null == dataBean ? 0 : dataBean.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            ImageView iv;
+            ImageView ivLeft;
+            ImageView ivCenter;
+            ImageView ivRight;
             TextView tvContent;
+            TextView tvTitle;
+            CardView cardView;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                iv = (ImageView) itemView.findViewById(R.id.iv);
+                cardView = (CardView) itemView.findViewById(R.id.card_view);
                 tvContent = (TextView) itemView.findViewById(R.id.tv_content);
+                tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+                ivLeft = (ImageView) itemView.findViewById(R.id.iv_left);
+                ivCenter = (ImageView) itemView.findViewById(R.id.iv_center);
+                ivRight = (ImageView) itemView.findViewById(R.id.iv_right);
             }
         }
     }

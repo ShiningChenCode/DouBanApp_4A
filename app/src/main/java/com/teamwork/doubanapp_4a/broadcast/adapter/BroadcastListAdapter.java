@@ -109,26 +109,6 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
 //        //如果是转播的
 //        if (status != null) {
 //            Glide.with(mContext).load(status.getAuthor().getAvatar()).transform(new GlideRoundTransform(mContext,30)).into(holder.ivAuthorAvatar);
-//            holder.tvAuthorName.setText(status.getAuthor().getName());
-//            holder.tvContent.setText(status.getText());
-//            holder.tvLikeCount.setText(String.valueOf(status.getLike_count()));
-//            holder.tvCommentCount.setText(String.valueOf(status.getComments_count()));
-//
-//            List<BroadcastsBean.ItemsBean.CommentsBean> listComment = mDatas.get(position).getComments();
-//            if (listComment.size() == 0) {
-//                holder.llComment.setVisibility(View.GONE);
-//            }
-//            if (listComment.size() == 1) {
-//                holder.llComment2.setVisibility(View.GONE);
-//                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
-//                holder.tvCommnetContent1.setText(listComment.get(0).getText());
-//            }
-//            if (listComment.size() >= 2) {
-//                holder.tvCommentAuthor1.setText(listComment.get(0).getAuthor().getName());
-//                holder.tvCommnetContent1.setText(listComment.get(0).getText());
-//                holder.tvCommentAuthor2.setText(listComment.get(1).getAuthor().getName());
-//                holder.tvCommnetContent2.setText(listComment.get(1).getText());
-//            }
 //        } else {
 //            holder.llBroadcast.setVisibility(View.GONE);
 //            //热门推荐

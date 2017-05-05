@@ -14,5 +14,7 @@
         <item name="colorPrimary">@color/green_300</item>
         <item name="colorPrimaryDark">@color/green_700</item>
     </style>
-
+<style name="flex_item">
+    <item name="android:layout_marginLeft">10dp</item>
+</style>
 </resources>

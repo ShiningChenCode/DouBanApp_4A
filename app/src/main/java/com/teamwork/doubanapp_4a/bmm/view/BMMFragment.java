@@ -63,9 +63,10 @@ public class BMMFragment extends BaseFragment {
     private void initFragments() {
         fragments = new ArrayList<>();
         fragments.add(new MovieFragment());
-        for (int i = 1; i < tabTitles.length; i++) {
-            fragments.add(ContentFragment.newInstance(tabTitles[i]));
-        }
+        fragments.add(new BookFragment());
+        fragments.add(new TVFragment());
+        fragments.add(new CityFragment());
+        fragments.add(new MusicFragment());
     }
 
     @Override

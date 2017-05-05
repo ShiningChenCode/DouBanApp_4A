@@ -29,12 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/grey_500" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
@@ -43,7 +37,10 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/green_a700"
             app:tabTextColor="@color/grey_700" />
-
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </FrameLayout>
