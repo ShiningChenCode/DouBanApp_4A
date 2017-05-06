@@ -136,7 +136,7 @@ public class TVRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 6;
     }
 
     @Override

@@ -34,14 +34,14 @@ public class SuggestionViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         context = itemView.getContext();
         recyclerView = (RecyclerView) itemView.findViewById(R.id.rcv);
-        llReadMore = (LinearLayout) itemView.findViewById(R.id.ll_read_more);
+     //   llReadMore = (LinearLayout) itemView.findViewById(R.id.ll_read_more);
         tvTitle = (TextView) itemView.findViewById(R.id.title);
     }
 
     public void bindViewHolder(MovieBean.ModulesBean modulesBean, List<MovieSuggestion.ItemsBean> items) {
         String title = modulesBean.getData().getTitle();
         tvTitle.setText(title);
-        llReadMore.setVisibility(View.VISIBLE);
+       // llReadMore.setVisibility(View.VISIBLE);
         recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context, 10), SpaceItemDecoration.LEFT_SPACE));
         recyclerView.setLayoutManager(new GridLayoutManager(context,3));
         recyclerView.setAdapter(new RecyclerViewAdapter(items));

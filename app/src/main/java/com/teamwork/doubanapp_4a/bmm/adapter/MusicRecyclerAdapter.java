@@ -136,7 +136,7 @@ public class MusicRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 5;
     }
 
     @Override

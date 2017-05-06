@@ -71,7 +71,7 @@ public class BMMFragment extends BaseFragment {
         fragments.add(new MovieFragment());
         fragments.add(new BookFragment());
         fragments.add(new TVFragment());
-        fragments.add(new CityFragment());
+//        fragments.add(new CityFragment());
         fragments.add(new MusicFragment());
     }
 

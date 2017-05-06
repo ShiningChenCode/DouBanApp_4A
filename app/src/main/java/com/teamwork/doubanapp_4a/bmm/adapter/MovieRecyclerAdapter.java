@@ -80,16 +80,17 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             ((ListViewHolder) holder).bindViewHolder(modules.get(position));
         } else if (holder instanceof SuggestionViewHolder) {
             ((SuggestionViewHolder) holder).bindViewHolder(modules.get(position), movieSuggestion.getItems());
-        } else if (holder instanceof BestReviewViewHolder) {
-            if (type == TYPE_BEST_REVIEWS) {
-                ((BestReviewViewHolder) holder).bindViewHolder("最受欢迎影评");
-            } else if (type == TYPE_FIND_MOVIE) {
-                ((BestReviewViewHolder) holder).bindViewHolder("发现好电影", "豆瓣网友制作的电影榜单", false, "带你进入不正常的世界");
-            }
-
-        } else if (holder instanceof FlexBoxViewHolder) {
-            ((FlexBoxViewHolder) holder).bindViewHolder(createFlexData());
         }
+//        else if (holder instanceof BestReviewViewHolder) {
+//            if (type == TYPE_BEST_REVIEWS) {
+//                ((BestReviewViewHolder) holder).bindViewHolder("最受欢迎影评");
+//            } else if (type == TYPE_FIND_MOVIE) {
+//                ((BestReviewViewHolder) holder).bindViewHolder("发现好电影", "豆瓣网友制作的电影榜单", false, "带你进入不正常的世界");
+//            }
+//
+//        } else if (holder instanceof FlexBoxViewHolder) {
+//            ((FlexBoxViewHolder) holder).bindViewHolder(createFlexData());
+//        }
     }
 
     private List<List<String>> createFlexData() {
@@ -119,7 +120,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return 8;
+        return 5;
     }
 
     @Override

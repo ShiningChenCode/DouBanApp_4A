@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,11 +20,14 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
+import com.teamwork.doubanapp_4a.broadcast.interfaces.OnGetDataListener;
+import com.teamwork.doubanapp_4a.broadcast.presenter.BroadcastPresenter;
 import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
@@ -43,7 +44,7 @@ import java.util.List;
 /**
  * 广播界面
  */
-public class BroadcastFragment extends Fragment implements View.OnClickListener {
+public class BroadcastFragment extends Fragment implements View.OnClickListener, OnGetDataListener<List<Broadcast>> {
 
     Context mContext;
     Toolbar toolbar;
@@ -51,13 +52,13 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     LinearLayout llSendBroadcast;
     Button btnFindMore;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
     SwipeRefreshLayout swiperefresh;
     LinearLayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     ScrollView scrollView;
-    List<Broadcast> mDatas;
     OnChangeFragmentListener mCallback;
-    int lastVisibleItem;
+    BroadcastPresenter broadcastPresenter;
 
 
     public BroadcastFragment() {
@@ -71,18 +72,18 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_broadcast, container, false);
         mContext = getContext();
 
-
+        broadcastPresenter = new BroadcastPresenter(mContext, this);
         initViews(view);
         bindListener();
-        initDB();
 
-        toolbar.setTitle("");
+
         //Fragment中设置ToolBar
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         //Fragment中设置ToolBar Menu
         setHasOptionsMenu(true);
 
         initRecyclerView();
+        broadcastPresenter.getBroadcasts();
         return view;
     }
 
@@ -90,13 +91,6 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mCallback = (OnChangeFragmentListener) activity;
-    }
-
-    private void initDB() {
-        //实例化我们的DBHelper
-        SqliteHelper dbHelper = new SqliteHelper(mContext);
-        //调用了这个方法后，DBHelper中的onCreate才会执行
-        dbHelper.getReadableDatabase();
     }
 
 
@@ -111,7 +105,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
-
+        progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         Glide.with(mContext).load("https://qnmob2.doubanio.com/icon/ur49215882-22.jpg?imageView2/2/q/80/w/640/h/640/format/webp").transform(new GlideRoundTransform(mContext, 30)).into(ivUser);
     }
 
@@ -125,49 +119,22 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initRecyclerView() {
-        BroadcastsBean broadcastsBean = new Gson().fromJson(FileUtil.readAssertResource(getActivity(), "broadcast.txt"), BroadcastsBean.class);
 
-        mDatas = new ArrayList<>();
-        mDatas = new BroadcastDataHelper(mContext).getBroadcasts();
+
         layoutManager = new LinearLayoutManager(mContext);
-
         //设置为垂直布局，这也是默认的
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new BroadcastListAdapter(mContext, mDatas);
-        recyclerView.setAdapter(adapter);
+
 
         //下拉刷新
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                ToastUtil.showShort(mContext, "下拉刷新");
+                pullDownRefreshData();
 
-                swiperefresh.setRefreshing(false);
-                mDatas.clear();
-                mDatas.addAll(new BroadcastDataHelper(mContext).getBroadcasts());
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        //RecyclerView滑动监听  上拉加载
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                Log.d("onScrollStateChanged", lastVisibleItem + "");
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
-//                    ToastUtil.showShort(mContext, "上拉加载");
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                Log.d("onScrolled", lastVisibleItem + "");
-                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
             }
         });
 
@@ -213,6 +180,50 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
                 break;
         }
+
+    }
+
+    @Override
+    public void gettingData() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void getDataSuccess(List<Broadcast> data) {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        adapter = new BroadcastListAdapter(mContext, data);
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void getDataFailed() {
+
+    }
+
+    @Override
+    public void refreshData() {
+
+
+    }
+
+    @Override
+    public void pullDownRefreshData() {
+        broadcastPresenter.pullDownRefreshBroadcasts();
+
+    }
+
+    @Override
+    public void pullDownRefreshSuccess(List<Broadcast> data) {
+        swiperefresh.setRefreshing(false);
+        adapter = new BroadcastListAdapter(mContext, data);
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void pullDownRefreshFailed() {
 
     }
 

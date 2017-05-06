@@ -18,8 +18,8 @@
         <item>@string/movie</item>
         <item>@string/read</item>
         <item>@string/tv</item>
-        <item>@string/city</item>
         <item>@string/music</item>
+        <item>@string/city</item>
     </string-array>
     <string name="title_activity_broadcast_detail">BroadcastDetailActivity</string>
     <string name="title_activity_edit_comment">EditCommentActivity</string>

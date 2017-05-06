@@ -14,6 +14,7 @@ import com.teamwork.doubanapp_4a.bmm.viewholder.MovieViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.RcvTopViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.ShowViewHolder;
 import com.teamwork.doubanapp_4a.bmm.viewholder.SuggestionViewHolder;
+import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,38 +75,42 @@ public class BooklRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int type = getItemViewType(position);
-        if (holder instanceof MovieViewHolder) {
             if (position == 0) {
+                LogUtil.d("onBindViewHolder AD","0");
                 ((MovieViewHolder) holder).bindViewHolder("新书速递", modules.get(0));
 
             } else if (position == 1) {
+                LogUtil.d("onBindViewHolder AD","1");
                 ((MovieViewHolder) holder).bindViewHolder("最受关注的虚拟书籍", modules.get(0));
-            } else if (position == 2) {
-                ((MovieViewHolder) holder).bindViewHolder("最受关注的非虚拟书籍", modules.get(0));
-            } else if (position == 8) {
-                ((MovieViewHolder) holder).bindViewHolder("限时特价电子书", modules.get(0));
-            } else if (position == 9) {
-                ((MovieViewHolder) holder).bindViewHolder("畅销图书榜", modules.get(0));
             }
-
-        } else if (holder instanceof AdViewHolder) {
-            ((AdViewHolder) holder).bindViewHolder(modules.get(1).getData());
-        } else if (holder instanceof ShowViewHolder) {
-            ((ShowViewHolder) holder).bindViewHolder(modules.get(2));
-        } else if (holder instanceof ListViewHolder) {
-            ((ListViewHolder) holder).bindViewHolder(modules.get(3));
-        } else if (holder instanceof SuggestionViewHolder) {
-            ((SuggestionViewHolder) holder).bindViewHolder(modules.get(4), movieSuggestion.getItems());
-        } else if (holder instanceof RcvTopViewHolder) {
-            ((RcvTopViewHolder) holder).bindViewHolder("豆瓣书店", modules.get(0), false, true);
-        } else if (holder instanceof BestReviewViewHolder) {
-            if (type == TYPE_BEST_REVIEWS) {
-                ((BestReviewViewHolder) holder).bindViewHolder("图书资讯", 1);
-            } else if (type == TYPE_FIND_MOVIE) {
-                ((BestReviewViewHolder) holder).bindViewHolder("发现好电影", "豆瓣网友制作的电影榜单", false, "带你进入不正常的世界");
+//            else if (position == 2) {
+//                ((MovieViewHolder) holder).bindViewHolder("最受关注的非虚拟书籍", modules.get(0));
+//            } else if (position == 8) {
+//                ((MovieViewHolder) holder).bindViewHolder("限时特价电子书", modules.get(0));
+//            } else if (position == 9) {
+//                ((MovieViewHolder) holder).bindViewHolder("畅销图书榜", modules.get(0));
+//            }
+//
+//        }
+            else if (position == 2) {
+                LogUtil.d("onBindViewHolder AD","2");
+                ((AdViewHolder) holder).bindViewHolder(modules.get(1).getData());
             }
-
-        }
+//            else if (holder instanceof ShowViewHolder) {
+//            ((ShowViewHolder) holder).bindViewHolder(modules.get(2));
+//        } else if (holder instanceof ListViewHolder) {
+//            ((ListViewHolder) holder).bindViewHolder(modules.get(3));
+//        } else if (holder instanceof SuggestionViewHolder) {
+//            ((SuggestionViewHolder) holder).bindViewHolder(modules.get(4), movieSuggestion.getItems());
+//        } else if (holder instanceof RcvTopViewHolder) {
+//            ((RcvTopViewHolder) holder).bindViewHolder("豆瓣书店", modules.get(0), false, true);
+//        } else if (holder instanceof BestReviewViewHolder) {
+//            if (type == TYPE_BEST_REVIEWS) {
+//                ((BestReviewViewHolder) holder).bindViewHolder("图书资讯", 1);
+//            } else if (type == TYPE_FIND_MOVIE) {
+//                ((BestReviewViewHolder) holder).bindViewHolder("发现好电影", "豆瓣网友制作的电影榜单", false, "带你进入不正常的世界");
+//            }
+//
 //        else if (holder instanceof FlexBoxViewHolder) {
 //            ((FlexBoxViewHolder) holder).bindViewHolder(createFlexData());
 //        }
@@ -138,31 +143,39 @@ public class BooklRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return 13;
+        return 3;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position < 3 || position == 8 || position == 9) {
-            return TYPE_TV_TITLE;
-        } else if (position == 3) {
-            return TYPE_BEST_REVIEWS;
-        } else if (position == 4 || position == 6) {
-            return TYPE_AD;
-        } else if (position == 5 | position == 7) {
-            return TYPE_RCV_TOP;
-        }else if (position == 10) {
-            return TYPE_SUGGESTION;
-        } else if (position == 11) {
-            return TYPE_BEST_REVIEWS;
-        } else if (position == 12) {
-            return TYPE_FIND_MOVIE;
-        }
-//        else if (position == 6) {
-//            return TYPE_FLEX_BOX;
+//        if (position < 3 || position == 8 || position == 9) {
+//            return TYPE_TV_TITLE;
+//        } else if (position == 3) {
+//            return TYPE_BEST_REVIEWS;
+//        } else if (position == 4 || position == 6) {
+//            return TYPE_AD;
+//        } else if (position == 5 | position == 7) {
+//            return TYPE_RCV_TOP;
+//        }else if (position == 10) {
+//            return TYPE_SUGGESTION;
+//        } else if (position == 11) {
+//            return TYPE_BEST_REVIEWS;
+//        } else if (position == 12) {
+//            return TYPE_FIND_MOVIE;
 //        }
-        else {
+////        else if (position == 6) {
+////            return TYPE_FLEX_BOX;
+////        }
+//        else {
+//            return TYPE_OTHER;
+//        }
+        if (position < 2) {
+            return TYPE_TV_TITLE;
+        } else if (position == 2) {
+            return TYPE_AD;
+        } else {
             return TYPE_OTHER;
         }
+
     }
 }
