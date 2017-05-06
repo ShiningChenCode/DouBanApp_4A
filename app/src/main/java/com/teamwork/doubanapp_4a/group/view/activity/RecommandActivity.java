@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
@@ -25,6 +28,7 @@ import java.util.List;
 public  class RecommandActivity extends AppCompatActivity implements View.OnClickListener {
 
 	private RecyclerView groupRecycleView;
+	private SwipeRefreshLayout mSwipeRefreshLayout;
 	private ImageView back_img;
 	private ImageView refresh_img;
 	private static Button select_btn;
@@ -50,6 +54,22 @@ public  class RecommandActivity extends AppCompatActivity implements View.OnClic
 		back_img = (ImageView) findViewById(R.id.back_img);
 		refresh_img = (ImageView) findViewById(R.id.refresh_img);
 		select_btn = (Button) findViewById(R.id.select_btn);
+		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+		mSwipeRefreshLayout.setColorSchemeResources(R.color.green_400);
+		mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				new Handler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						Log.i(TAG, "run: " + "-----------");
+						//mMoreAdapter.notifyDataSetChanged();
+						Toast.makeText(RecommandActivity.this,"刷新完成",Toast.LENGTH_SHORT).show();
+						mSwipeRefreshLayout.setRefreshing(false);
+					}
+				},2000);
+			}
+		});
 		back_img.setOnClickListener(this);
 		refresh_img.setOnClickListener(this);
 		select_btn.setOnClickListener(this);

@@ -45,8 +45,9 @@
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/relative"
+        android:fillViewport="true"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -232,22 +233,21 @@
             android:id="@+id/oftenrecycleview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view1"
-            >
+            android:layout_below="@+id/view1">
         </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative2"
         android:background="#ffffff"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/relative2"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:paddingLeft="20dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="5dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp">
         <TextView
             android:id="@+id/more"
             android:layout_width="wrap_content"

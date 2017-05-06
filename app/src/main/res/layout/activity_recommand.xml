@@ -29,12 +29,16 @@
             android:textSize="18dp"
             />
     </RelativeLayout>
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scrollView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/relative"
-        android:layout_weight="1"
+        android:layout_weight="1">
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,6 +99,8 @@
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
