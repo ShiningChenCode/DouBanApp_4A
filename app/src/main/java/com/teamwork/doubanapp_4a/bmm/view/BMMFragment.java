@@ -41,8 +41,14 @@ public class BMMFragment extends BaseFragment {
     }
 
     @Override
-    public void loadData() {
+    public void onStart() {
+        super.onStart();
         tabTitles = getResources().getStringArray(R.array.bbm_tab_title);
+    }
+
+    @Override
+    public void loadData() {
+
         initFragments();
         initViewPager();
         setUpActionBar();

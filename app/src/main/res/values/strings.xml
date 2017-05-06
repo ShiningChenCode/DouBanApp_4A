@@ -21,4 +21,6 @@
         <item>@string/city</item>
         <item>@string/music</item>
     </string-array>
+    <string name="title_activity_broadcast_detail">BroadcastDetailActivity</string>
+    <string name="title_activity_edit_comment">EditCommentActivity</string>
 </resources>

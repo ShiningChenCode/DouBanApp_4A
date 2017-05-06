@@ -1,6 +1,8 @@
 package com.teamwork.doubanapp_4a.broadcast.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +13,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
-import com.teamwork.doubanapp_4a.broadcast.GlideRoundTransform;
+import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
-import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
 import com.teamwork.doubanapp_4a.broadcast.model.Comment;
 import com.teamwork.doubanapp_4a.broadcast.model.Like;
 import com.teamwork.doubanapp_4a.broadcast.model.User;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
+import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
+import com.teamwork.doubanapp_4a.broadcast.view.BroadcastDetailActivity;
+import com.teamwork.doubanapp_4a.broadcast.view.EditCommentActivity;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Iden on 2017/4/23.
+ * 广播列表适配
  */
 
 public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdapter.MyViewHolder> {
@@ -114,10 +118,19 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
 //            //热门推荐
 //        }
 
+        holder.llBroadcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent((Activity) mContext, BroadcastDetailActivity.class);
+                intent.putExtra("broadcast_id", broadcast.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
 
     }
 
-    private String showReleaseTime(long time) {
+    public static String showReleaseTime(long time) {
         long now = System.currentTimeMillis();
         long interval = (now - time) / 1000;
 //
@@ -127,7 +140,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
             return interval / 60 + "分钟前";
         } else if (interval >= 3600 && interval < 3600 * 24) {
             return interval / 3600 + "小时前";
-        }  else if (new Date(now).getYear() == new Date(time).getYear()) {
+        } else if (new Date(now).getYear() == new Date(time).getYear()) {
             return DATE_FORMAT_MONTH.format(new Date(time));
         }
 

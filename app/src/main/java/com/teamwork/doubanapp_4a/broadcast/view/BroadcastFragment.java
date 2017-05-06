@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,8 +24,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
+import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
@@ -43,7 +47,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
     Context mContext;
     Toolbar toolbar;
-    ImageView ivSearchUser, ivChat, ivCapturePhotos;
+    ImageView ivUser, ivSearchUser, ivChat, ivCapturePhotos;
     LinearLayout llSendBroadcast;
     Button btnFindMore;
     RecyclerView recyclerView;
@@ -52,7 +56,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
     RecyclerView.Adapter adapter;
     ScrollView scrollView;
     List<Broadcast> mDatas;
-
+    OnChangeFragmentListener mCallback;
     int lastVisibleItem;
 
 
@@ -66,6 +70,8 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_broadcast, container, false);
         mContext = getContext();
+
+
         initViews(view);
         bindListener();
         initDB();
@@ -80,6 +86,12 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallback = (OnChangeFragmentListener) activity;
+    }
+
     private void initDB() {
         //实例化我们的DBHelper
         SqliteHelper dbHelper = new SqliteHelper(mContext);
@@ -90,6 +102,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
 
     private void initViews(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ivUser = (ImageView) view.findViewById(R.id.iv_user);
         ivSearchUser = (ImageView) view.findViewById(R.id.iv_search_user);
         ivChat = (ImageView) view.findViewById(R.id.iv_chat);
         ivCapturePhotos = (ImageView) view.findViewById(R.id.iv_capture_photos);
@@ -99,7 +112,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
 
-
+        Glide.with(mContext).load("https://qnmob2.doubanio.com/icon/ur49215882-22.jpg?imageView2/2/q/80/w/640/h/640/format/webp").transform(new GlideRoundTransform(mContext, 30)).into(ivUser);
     }
 
     private void bindListener() {
@@ -182,6 +195,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.iv_search_user:
                 ToastUtil.showShort(mContext, "查找用户");
+                IntentUtil.showIntent((Activity) mContext, SearchUserActivity.class);
                 break;
             case R.id.iv_chat:
                 ToastUtil.showShort(mContext, "聊天窗口");
@@ -195,8 +209,17 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btn_find_more:
                 ToastUtil.showShort(mContext, "发现更多");
+                mCallback.changeToRecomentBroadcast();
+
                 break;
         }
 
     }
+
+    public interface OnChangeFragmentListener {
+        abstract void changeToRecomentBroadcast();
+
+        abstract void changeToBroadcast();
+    }
+
 }

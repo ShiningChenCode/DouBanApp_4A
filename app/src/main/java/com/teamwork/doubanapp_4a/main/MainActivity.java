@@ -2,6 +2,7 @@ package com.teamwork.doubanapp_4a.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.bmm.view.BMMFragment;
+import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
+import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.view.BroadcastFragment;
+import com.teamwork.doubanapp_4a.broadcast.view.RecommentBroadcastFragment;
 import com.teamwork.doubanapp_4a.group.view.GroupFragment;
 import com.teamwork.doubanapp_4a.home.view.HomeFragment;
 import com.teamwork.doubanapp_4a.mine.view.MineFragment;
@@ -20,13 +24,13 @@ import com.teamwork.doubanapp_4a.mine.view.MineFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener, BroadcastFragment.OnChangeFragmentListener {
     LinearLayout llHome, llBMM, llBroadcast, llGroup, llMine;
     ImageView ivHome, ivBMM, ivBroadcast, ivGroup, ivMine;
     TextView tvHome, tvBMM, tvBroadcast, tvGroup, tvMine;
 
     ViewPager viewPager;
-    FragmentPagerAdapter adapter;
+    FragmentStatePagerAdapter adapter;
     List<Fragment> mFragments;
     List<ImageView> mTabImageViews;
     List<TextView> mTabTextViews;
@@ -102,7 +106,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFragments.add(new GroupFragment());
         mFragments.add(new MineFragment());
 
-        adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            private int mChildCount = 0;
+
+            @Override
+            public void notifyDataSetChanged() {
+                mChildCount = getCount();
+                super.notifyDataSetChanged();
+            }
+
             @Override
             public Fragment getItem(int position) {
                 return mFragments.get(position);
@@ -111,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public int getCount() {
                 return mFragments.size();
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
             }
         };
 
@@ -184,4 +201,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void changeToRecomentBroadcast() {
+        LogUtil.d("changeToRecomentBroadcast", "changeToRecomentBroadcast");
+        mFragments.add(2, new RecommentBroadcastFragment());
+        mFragments.remove(3);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void changeToBroadcast() {
+        mFragments.add(2, new BroadcastFragment());
+        mFragments.remove(3);
+        adapter.notifyDataSetChanged();
+    }
 }

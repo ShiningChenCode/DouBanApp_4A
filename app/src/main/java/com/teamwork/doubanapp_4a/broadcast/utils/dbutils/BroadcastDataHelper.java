@@ -35,7 +35,7 @@ public class BroadcastDataHelper {
     public List<Broadcast> getBroadcasts() {
         List<Broadcast> broadcasts = new ArrayList<Broadcast>();
 
-        Cursor cursor = db.query("Broadcast", null, null, null, null, null, "time desc" );
+        Cursor cursor = db.query("Broadcast", null, null, null, null, null, "time desc");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Broadcast broadcast = new Broadcast();
@@ -51,10 +51,23 @@ public class BroadcastDataHelper {
         return broadcasts;
     }
 
+    public Broadcast getBroadcast(int broadcsat_id) {
+        Broadcast broadcast = new Broadcast();
+        Cursor cursor = db.query("Broadcast", null, "_id='" + broadcsat_id + "'", null, null, null, null);
+        cursor.moveToFirst();
+        broadcast.setId(cursor.getInt(cursor.getColumnIndex("_ID")));
+        broadcast.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+        broadcast.setContent(cursor.getString(cursor.getColumnIndex("content")));
+        broadcast.setTime(cursor.getLong(cursor.getColumnIndex("time")));
+        cursor.close();
+        return broadcast;
+    }
+
+
     public List<Comment> getComments(int broadcsat_id) {
         List<Comment> comments = new ArrayList<Comment>();
 
-        Cursor cursor = db.query("Comment", null, "broadcast_id= '" + broadcsat_id + "'", null, null, null, "time");
+        Cursor cursor = db.query("Comment", null, "broadcast_id= '" + broadcsat_id + "'", null, null, null, "time desc");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Comment comment = new Comment();
@@ -75,7 +88,7 @@ public class BroadcastDataHelper {
     public List<Like> getLikes(int broadcsat_id) {
         List<Like> likes = new ArrayList<Like>();
 
-        Cursor cursor = db.query("Like", null, "broadcast_id= '" + broadcsat_id + "'", null, null, null, "time");
+        Cursor cursor = db.query("Like", null, "broadcast_id= '" + broadcsat_id + "'", null, null, null, "time desc");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Like like = new Like();
@@ -113,6 +126,11 @@ public class BroadcastDataHelper {
 
     public void sendBroadcast(int user_id, String content) {
         db.execSQL("INSERT INTO Broadcast(user_id,content,time) VALUES('" + user_id + "','" + content + "','" + System.currentTimeMillis() + "')");
+
+    }
+
+    public void sendComment(int user_id, int broadcast_id, String content) {
+        db.execSQL("INSERT INTO Comment(user_id,broadcast_id,content,time) VALUES('" + user_id + "','" + broadcast_id + "','" + content + "','" + System.currentTimeMillis() + "')");
 
     }
 

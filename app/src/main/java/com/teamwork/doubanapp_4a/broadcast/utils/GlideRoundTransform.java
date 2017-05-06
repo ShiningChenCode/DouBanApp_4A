@@ -1,4 +1,4 @@
-package com.teamwork.doubanapp_4a.broadcast;
+package com.teamwork.doubanapp_4a.broadcast.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
