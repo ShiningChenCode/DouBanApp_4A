@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(this);
+        viewPager.setOffscreenPageLimit(5);
 
     }
 

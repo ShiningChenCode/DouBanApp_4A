@@ -53,7 +53,7 @@
     <color name="douban_white_40_percent">#66ffffff</color>
     <color name="douban_white_50_percent">#7fffffff</color>
     <color name="douban_white_60_percent">#99ffffff</color>
-    <color name="douban_white">#ffffffff</color>
+    <color name="douban_white">#ffffff</color>
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>

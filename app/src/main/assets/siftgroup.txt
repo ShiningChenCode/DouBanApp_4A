@@ -1,0 +1,34 @@
+{
+    "mixed_rec_groups":[
+        {
+            "id":"100054",
+            "image":"https://img3.doubanio.com/img/files/file-1493000842.png",
+            "name":"",
+            "uri":"https://m.douban.com/page/y252dy9"
+        },
+        {
+            "id":"10053",
+            "image":"https://img3.doubanio.com/img/files/file-1492684220.png",
+            "name":"",
+            "uri":"https://m.douban.com/page/x88pazk"
+        },
+        {
+            "id":"wufan",
+            "image":"https://img3.doubanio.com/img/files/file-1492486296.png",
+            "name":"",
+            "uri":"https://m.douban.com/page/xexe8ql"
+        },
+        {
+            "id":"10052",
+            "image":"https://img3.doubanio.com/img/files/file-1492194103.png",
+            "name":"",
+            "uri":"https://m.douban.com/page/lc5vilx"
+        },
+        {
+            "id":"10354",
+            "image":"https://img3.doubanio.com/img/files/file-1491993415.png",
+            "name":"",
+            "uri":"https://m.douban.com/page/9evi1qr"
+        }
+    ]
+}

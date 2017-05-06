@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teamwork.doubanapp_4a">
 
+
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".group.view.activity.RecommandActivity" />
         <activity
             android:name=".broadcast.view.SendBroadcastActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
@@ -29,6 +31,28 @@
         <activity
             android:name=".broadcast.view.EditCommentActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+
+
+        <activity android:name=".group.view.activity.DetailActivity"></activity>
+        <activity android:name=".group.view.activity.NewEstTopicActivity"></activity>
+        <activity android:name=".group.view.activity.PublishActivity"></activity>
+        <activity android:name=".group.view.activity.ResponseActivity"></activity>
+        <activity android:name=".group.view.activity.RecentlyBrowseActivity"></activity>
+        <activity android:name=".mine.view.activity.SettingActivity"></activity>
+        <activity android:name=".mine.view.activity.MyLikeActivity"></activity>
+        <activity android:name=".mine.view.activity.NoteActivity"></activity>
+        <activity android:name=".mine.view.activity.AlbumActivity"></activity>
+        <activity android:name=".mine.view.activity.BroadCastActivity"></activity>
+        <activity android:name=".mine.view.activity.MovieActivity"></activity>
+        <activity android:name=".mine.view.activity.ReadingActivity"></activity>
+        <activity android:name=".mine.view.activity.MusicActivity"></activity>
+        <activity android:name=".mine.view.activity.LocalActivity"></activity>
+        <activity android:name=".mine.view.activity.DouBanTimeActivity"></activity>
+        <activity android:name=".mine.view.activity.DouLieActivity"></activity>
+        <activity android:name=".mine.view.activity.IndentActivity"></activity>
+        <activity android:name=".mine.view.activity.MyWalletActivity"></activity>
+        <activity android:name=".mine.view.activity.RemindActivity"></activity>
+
     </application>
 
 </manifest>
