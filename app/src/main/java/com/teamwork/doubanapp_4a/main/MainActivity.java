@@ -1,11 +1,10 @@
 package com.teamwork.doubanapp_4a.main;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.bmm.view.BMMFragment;
-import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.view.BroadcastFragment;
 import com.teamwork.doubanapp_4a.broadcast.view.RecommentBroadcastFragment;

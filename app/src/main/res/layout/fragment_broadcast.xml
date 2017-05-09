@@ -173,8 +173,6 @@
                     android:layout_height="match_parent"
                     android:divider="@color/green_200"
                     android:dividerHeight="10dp">
-
-
                 </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>

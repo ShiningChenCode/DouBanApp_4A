@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.teamwork.doubanapp_4a.group.view.activity.DetailActivity">
+    tools:context="com.teamwork.doubanapp_4a.group.view.view.DetailActivity">
     <RelativeLayout
         android:id="@+id/titlelayout"
         android:layout_width="match_parent"

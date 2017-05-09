@@ -5,7 +5,7 @@
     android:id="@+id/activity_publish"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.teamwork.doubanapp_4a.group.view.activity.PublishActivity">
+    tools:context="com.teamwork.doubanapp_4a.group.view.view.PublishActivity">
     <com.teamwork.doubanapp_4a.group.view.basetoolbar.BaseTitle
         android:id="@+id/basetitle"
         android:layout_width="match_parent"

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.teamwork.doubanapp_4a.broadcast.interfaces.IGetData;
 import com.teamwork.doubanapp_4a.broadcast.interfaces.OnDataListener;
-import com.teamwork.doubanapp_4a.broadcast.interfaces.OnGetDataListener;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
 
