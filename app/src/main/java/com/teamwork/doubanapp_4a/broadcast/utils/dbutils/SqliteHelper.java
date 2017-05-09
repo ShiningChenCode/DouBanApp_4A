@@ -5,12 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
-import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
 import com.teamwork.doubanapp_4a.broadcast.model.Comment;
 import com.teamwork.doubanapp_4a.broadcast.model.Like;
 import com.teamwork.doubanapp_4a.broadcast.model.User;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
-import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.lang.reflect.Field;
 
@@ -22,7 +20,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     //数据库的版本
     private final static int DB_VERSION = 1;
     //数据库名
-    private final static String DB_NAME = "Broadcast.db";
+    private final static String DB_NAME = "Broadcast1.db";
 
     private Context mContext;
 
@@ -114,13 +112,14 @@ public class SqliteHelper extends SQLiteOpenHelper {
      * @return sql建表语句
      */
     private <T> String createTable(Class<T> clazz, String tableName) {
+
         //实例化一个容器，用来拼接sql语句
         StringBuffer sBuffer = new StringBuffer();
         //sql语句，第一个字段为_ID 主键自增，这是通用的，所以直接写死
         sBuffer.append("create table if not exists " + tableName + " " +
                 "(_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,");
         //得到实体类中所有的公有属性
-        Field[] fields = clazz.getFields();
+        Field[] fields = clazz.getDeclaredFields();
         //遍历所有的公有属性
         for (Field field : fields) {
             //如果属性不为_id的话，说明是新的字段
@@ -142,6 +141,8 @@ public class SqliteHelper extends SQLiteOpenHelper {
         //替换成); 表明sql语句结束
         sBuffer.append(");");
         //返回这条sql语句
+
+        LogUtil.d("SqliteHelper",sBuffer.toString());
         return sBuffer.toString();
     }
 

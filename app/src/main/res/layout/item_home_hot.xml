@@ -1,98 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/rl_news_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="10dp">
 
-
-    >
     <LinearLayout
         android:id="@+id/ll_news_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/txt_news_profile"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20dp"
                 android:text="我曾经连续偷拍我的爸妈390天"
-                />
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
             <TextView
-                android:id="@+id/txt_news_content"
+                android:id="@+id/tv_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="15dp"
                 android:text="我在这柴米油盐中，在镜头背后，看到了他们的爱情"
-                />
+                android:textSize="14dp" />
 
-            </LinearLayout>
+        </LinearLayout>
+
         <ImageView
-            android:id="@+id/img_news"
-            android:layout_height="80dp"
+            android:id="@+id/iv_cover"
             android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/b_1"
-            />
-        </LinearLayout>
+            android:src="@drawable/b_1" />
+    </LinearLayout>
+
     <View
         android:id="@+id/view_line"
         android:layout_width="10dp"
-        android:layout_marginTop="10dp"
         android:layout_height="1px"
         android:layout_below="@+id/ll_news_container"
-        android:background="@color/grey_500"></View>
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
+        android:background="@color/grey_500"></View>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/view_line"
-        >
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="作者："
-            />
+            android:layout_height="wrap_content"
+            android:text="作者：" />
+
         <TextView
-            android:id="@+id/txt_author"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_author"
             android:layout_width="wrap_content"
-            android:text="中国三明治"
-            />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="中国三明治" />
+    </LinearLayout>
+
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/view_line"
-        >
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="来自栏目：" />-->
+
         <TextView
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_source"
             android:layout_width="wrap_content"
-            android:text="来自栏目："
-            />
-        <TextView
-            android:id="@+id/txt_from"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="一周热门影视"
-            />
-        </LinearLayout>
+            android:text="一周热门影视" />
+    </LinearLayout>
 
 </RelativeLayout>

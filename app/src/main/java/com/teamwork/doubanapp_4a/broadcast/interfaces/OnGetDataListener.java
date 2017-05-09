@@ -1,5 +1,7 @@
 package com.teamwork.doubanapp_4a.broadcast.interfaces;
 
+import android.view.View;
+
 /**
  * Created by Iden on 2017/5/6.
  */
@@ -9,7 +11,7 @@ public interface OnGetDataListener<T> {
 
     void getDataSuccess(T data);
 
-    void getDataFailed();
+    void getDataFailed(String msg);
 
     void refreshData();
 
@@ -17,6 +19,13 @@ public interface OnGetDataListener<T> {
 
     void pullDownRefreshSuccess(T data);
 
-    void pullDownRefreshFailed();
+    void pullDownRefreshFailed(String msg);
+
+
+    void showData();
+
+    void loadingData();
+
+    void showFailed(String msg);
 
 }

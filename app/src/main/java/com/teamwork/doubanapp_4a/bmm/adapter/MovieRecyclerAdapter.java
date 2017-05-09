@@ -73,7 +73,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof MovieViewHolder) {
             ((MovieViewHolder) holder).bindViewHolder("", modules.get(position));
         } else if (holder instanceof AdViewHolder) {
-            ((AdViewHolder) holder).bindViewHolder(modules.get(position).getData());
+            ((AdViewHolder) holder).bindViewHolder(modules.get(position));
         } else if (holder instanceof ShowViewHolder) {
             ((ShowViewHolder) holder).bindViewHolder(modules.get(position));
         } else if (holder instanceof ListViewHolder) {

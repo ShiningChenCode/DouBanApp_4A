@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,29 +21,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.interfaces.OnGetDataListener;
 import com.teamwork.doubanapp_4a.broadcast.presenter.BroadcastPresenter;
 import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
-import com.teamwork.doubanapp_4a.broadcast.model.BroadcastsBean;
-import com.teamwork.doubanapp_4a.broadcast.utils.FileUtil;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.SqliteHelper;
+import com.teamwork.doubanapp_4a.broadcast.utils.IntentUtil;
+import com.teamwork.doubanapp_4a.main.base.BaseFragment;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 广播界面
  */
-public class BroadcastFragment extends Fragment implements View.OnClickListener, OnGetDataListener<List<Broadcast>> {
+public class BroadcastFragment extends BaseFragment implements View.OnClickListener, OnGetDataListener<List<Broadcast>> {
 
     Context mContext;
     Toolbar toolbar;
@@ -58,7 +53,8 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
     RecyclerView.Adapter adapter;
     ScrollView scrollView;
     OnChangeFragmentListener mCallback;
-    BroadcastPresenter broadcastPresenter;
+    BroadcastPresenter presenter;
+    TextView tvFailed;
 
 
     public BroadcastFragment() {
@@ -67,12 +63,18 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
 
 
     @Override
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        presenter.getBroadcasts(0);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_broadcast, container, false);
         mContext = getContext();
 
-        broadcastPresenter = new BroadcastPresenter(mContext, this);
+        presenter = new BroadcastPresenter(mContext, this);
         initViews(view);
         bindListener();
 
@@ -83,7 +85,7 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
         setHasOptionsMenu(true);
 
         initRecyclerView();
-        broadcastPresenter.getBroadcasts();
+
         return view;
     }
 
@@ -106,7 +108,9 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
         swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         scrollView = (ScrollView) view.findViewById(R.id.scrollview);
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
-        Glide.with(mContext).load("https://qnmob2.doubanio.com/icon/ur49215882-22.jpg?imageView2/2/q/80/w/640/h/640/format/webp").transform(new GlideRoundTransform(mContext, 30)).into(ivUser);
+        tvFailed = (TextView) view.findViewById(R.id.tv_failed);
+        Glide.with(mContext).load("https://qnmob2.doubanio.com/icon/ur49215882-22.jpg?imageView2/2/q/80/w/640/h/640/format/webp").
+                transform(new GlideRoundTransform(mContext, 30)).into(ivUser);
     }
 
     private void bindListener() {
@@ -185,22 +189,22 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void gettingData() {
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        loadingData();
     }
 
     @Override
     public void getDataSuccess(List<Broadcast> data) {
-        progressBar.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        showData();
         adapter = new BroadcastListAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
     }
 
 
     @Override
-    public void getDataFailed() {
-
+    public void getDataFailed(String msg) {
+        showFailed(msg);
+        if(swiperefresh!=null)
+            swiperefresh.setRefreshing(false);
     }
 
     @Override
@@ -211,21 +215,53 @@ public class BroadcastFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void pullDownRefreshData() {
-        broadcastPresenter.pullDownRefreshBroadcasts();
+        presenter.getBroadcasts(1);
 
     }
 
     @Override
     public void pullDownRefreshSuccess(List<Broadcast> data) {
+        showData();
         swiperefresh.setRefreshing(false);
         adapter = new BroadcastListAdapter(mContext, data);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
-    public void pullDownRefreshFailed() {
+    public void pullDownRefreshFailed(String msg) {
+        swiperefresh.setRefreshing(false);
+        showFailed(msg);
 
     }
+
+    public void showData() {
+        tvFailed.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
+    }
+
+    public void loadingData() {
+        tvFailed.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+
+    }
+
+    public void showFailed(String msg) {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        tvFailed.setVisibility(View.VISIBLE);
+        tvFailed.setText(msg);
+        tvFailed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.getBroadcasts(0);
+            }
+        });
+
+    }
+
 
     public interface OnChangeFragmentListener {
         abstract void changeToRecomentBroadcast();

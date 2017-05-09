@@ -13,18 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.teamwork.doubanapp_4a.R;
-import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.adapter.RecomentBroadcastAdapter;
-import com.teamwork.doubanapp_4a.broadcast.adapter.SearchUserListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.utils.GridSpacingItemDecoration;
+import com.teamwork.doubanapp_4a.broadcast.utils.IntentUtil;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.util.ArrayList;

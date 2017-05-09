@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
-import com.teamwork.doubanapp_4a.main.MainActivity;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 public class SendBroadcastActivity extends AppCompatActivity implements View.OnClickListener {

@@ -1,8 +1,11 @@
-package com.teamwork.doubanapp_4a.broadcast.utils.dbutils;
+package com.teamwork.doubanapp_4a.broadcast.utils;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+
+import com.teamwork.doubanapp_4a.bmm.view.WebviewActivity;
+
 
 /**
  * Intent工具类
@@ -30,4 +33,11 @@ public class IntentUtil {
     public static void showIntent(Activity context, Class<?> clzz) {
         showIntent(context, clzz, null, null);
     }
+
+    public static void showWebViewIntent(Activity context, String url) {
+
+        showIntent(context, WebviewActivity.class, new String[]{"url"}, new String[]{url});
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.teamwork.doubanapp_4a.bmm.viewholder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.bmm.adapter.SpaceItemDecoration;
 import com.teamwork.doubanapp_4a.bmm.bean.MovieBean;
 import com.teamwork.doubanapp_4a.bmm.utils.DensityUtil;
+import com.teamwork.doubanapp_4a.bmm.view.WebviewActivity;
+import com.teamwork.doubanapp_4a.broadcast.utils.IntentUtil;
 
 import java.util.List;
 
@@ -26,52 +29,53 @@ import java.util.List;
 public class MovieViewHolder extends RecyclerView.ViewHolder {
     TextView tvTitle;
     RecyclerView recyclerView;
-    Context context;
+    Context mContext;
     boolean hasAuthor = false;
     boolean isShowDate = false;
     boolean isSale = false;
+
     public MovieViewHolder(View itemView) {
         super(itemView);
-        context = itemView.getContext();
+        mContext = itemView.getContext();
         recyclerView = (RecyclerView) itemView.findViewById(R.id.rcv);
         tvTitle = (TextView) itemView.findViewById(R.id.title);
     }
 
-    public void bindViewHolder(String title,MovieBean.ModulesBean modulesBean) {
-        if (TextUtils.isEmpty(title)){
-            title  = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
+    public void bindViewHolder(String title, MovieBean.ModulesBean modulesBean) {
+        if (TextUtils.isEmpty(title)) {
+            title = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
         }
         tvTitle.setText(title);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context,10),SpaceItemDecoration.LEFT_SPACE));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(mContext, 10), SpaceItemDecoration.LEFT_SPACE));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSubject_collection_boards().get(0).getItems()));
     }
 
-    public void bindViewHolder(String title,MovieBean.ModulesBean modulesBean,boolean hasAuthor) {
+    public void bindViewHolder(String title, MovieBean.ModulesBean modulesBean, boolean hasAuthor) {
         this.hasAuthor = hasAuthor;
-        if (TextUtils.isEmpty(title)){
-            title  = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
+        if (TextUtils.isEmpty(title)) {
+            title = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
         }
         tvTitle.setText(title);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context,10),SpaceItemDecoration.LEFT_SPACE));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(mContext, 10), SpaceItemDecoration.LEFT_SPACE));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSubject_collection_boards().get(0).getItems()));
     }
 
 
-    public void bindViewHolder(String title,MovieBean.ModulesBean modulesBean,boolean isShowDate,boolean isSale) {
+    public void bindViewHolder(String title, MovieBean.ModulesBean modulesBean, boolean isShowDate, boolean isSale) {
         this.isSale = isSale;
         this.isShowDate = isShowDate;
-        if (TextUtils.isEmpty(title)){
-            title  = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
+        if (TextUtils.isEmpty(title)) {
+            title = modulesBean.getData().getSubject_collection_boards().get(0).getSubject_collection().getName();
         }
         tvTitle.setText(title);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(context,10),SpaceItemDecoration.LEFT_SPACE));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(DensityUtil.dp2px(mContext, 10), SpaceItemDecoration.LEFT_SPACE));
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new RecyclerViewAdapter(modulesBean.getData().getSubject_collection_boards().get(0).getItems()));
     }
 
-    public void bindViewHolder(String title){
+    public void bindViewHolder(String title) {
         tvTitle.setText(title);
     }
 
@@ -88,7 +92,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             ViewHolder viewHolder = null;
             if (holder instanceof ViewHolder) {
                 viewHolder = (ViewHolder) holder;
@@ -97,20 +101,28 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
             if (itemsBeen.get(position).getRating() != null) {
                 viewHolder.rateNumber.setText(String.valueOf(itemsBeen.get(position).getRating().getValue()));
             }
-            if (hasAuthor){
+            if (hasAuthor) {
                 viewHolder.tvAuthor.setVisibility(View.VISIBLE);
             }
 
-            if (isSale){
+            if (isSale) {
                 viewHolder.tvSale.setVisibility(View.VISIBLE);
             }
 
-            if (isShowDate){
+            if (isShowDate) {
                 viewHolder.tvDate.setVisibility(View.VISIBLE);
             }
 
             viewHolder.llRate.setVisibility(View.VISIBLE);
             viewHolder.tvContent.setText(itemsBeen.get(position).getTitle());
+            viewHolder.iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    IntentUtil.showWebViewIntent((Activity) mContext, itemsBeen.get(position).getUrl());
+                }
+            });
         }
 
         @Override

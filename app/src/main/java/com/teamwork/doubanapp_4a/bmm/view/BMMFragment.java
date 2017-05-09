@@ -6,15 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.bmm.adapter.VpTabRecyclerAdapter;
-import com.teamwork.doubanapp_4a.bmm.view.base.BaseFragment;
+import com.teamwork.doubanapp_4a.main.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,34 +38,41 @@ public class BMMFragment extends BaseFragment {
 
     }
 
+    @Nullable
     @Override
-    public int getLayoutResId() {
-        return R.layout.fragment_bmm;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_bmm, container, false);
+
+        toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        toolbar.setTitle(getString(R.string.book_media_video));
+        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        return view;
+
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
         tabTitles = getResources().getStringArray(R.array.bbm_tab_title);
-    }
-
-    @Override
-    public void loadData() {
-
         initFragments();
         initViewPager();
         setUpActionBar();
+
     }
 
+
     private void setUpActionBar() {
-        getAppCompatActivity().setSupportActionBar(toolbar);
-        getAppCompatActivity().getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         tvTitle.setText(getString(R.string.book_media_video));
     }
 
     private void initViewPager() {
         vpAdapter = new VpTabRecyclerAdapter(getChildFragmentManager(), tabTitles, fragments);
         viewPager.setAdapter(vpAdapter);
+        viewPager.setOffscreenPageLimit(4);
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -75,14 +85,11 @@ public class BMMFragment extends BaseFragment {
         fragments.add(new MusicFragment());
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
-        toolbar.setTitle(getString(R.string.book_media_video));
-        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+
     }
 
     @Override

@@ -162,10 +162,22 @@
                     android:layout_height="50px"
                     android:background="@color/grey_200"></View>
 
+
                 <ProgressBar
                     android:id="@+id/progressbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/tv_failed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerview"

@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,20 +17,15 @@ import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.adapter.BroadcastListAdapter;
 import com.teamwork.doubanapp_4a.broadcast.adapter.CommentAdapter;
-import com.teamwork.doubanapp_4a.broadcast.adapter.RecomentBroadcastAdapter;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.model.Comment;
 import com.teamwork.doubanapp_4a.broadcast.model.User;
 import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.utils.GridSpacingItemDecoration;
-import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.v7.recyclerview.R.attr.layoutManager;
 
 public class BroadcastDetailActivity extends AppCompatActivity implements View.OnClickListener {
     Context mContext;

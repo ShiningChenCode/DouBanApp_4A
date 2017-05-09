@@ -20,9 +20,7 @@ import com.teamwork.doubanapp_4a.broadcast.model.Like;
 import com.teamwork.doubanapp_4a.broadcast.model.User;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
-import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.IntentUtil;
 import com.teamwork.doubanapp_4a.broadcast.view.BroadcastDetailActivity;
-import com.teamwork.doubanapp_4a.broadcast.view.EditCommentActivity;
 import com.teamwork.doubanapp_4a.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;

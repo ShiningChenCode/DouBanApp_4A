@@ -2,15 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teamwork.doubanapp_4a">
 
-
     <!-- if you want to load images from a file OR from the internet -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".main.base.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="仿豆瓣App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.MainActivity">
@@ -30,29 +37,27 @@
         <activity android:name=".broadcast.view.BroadcastDetailActivity" />
         <activity
             android:name=".broadcast.view.EditCommentActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
-
-
-        <activity android:name=".group.view.activity.DetailActivity"></activity>
-        <activity android:name=".group.view.activity.NewEstTopicActivity"></activity>
-        <activity android:name=".group.view.activity.PublishActivity"></activity>
-        <activity android:name=".group.view.activity.ResponseActivity"></activity>
-        <activity android:name=".group.view.activity.RecentlyBrowseActivity"></activity>
-        <activity android:name=".mine.view.activity.SettingActivity"></activity>
-        <activity android:name=".mine.view.activity.MyLikeActivity"></activity>
-        <activity android:name=".mine.view.activity.NoteActivity"></activity>
-        <activity android:name=".mine.view.activity.AlbumActivity"></activity>
-        <activity android:name=".mine.view.activity.BroadCastActivity"></activity>
-        <activity android:name=".mine.view.activity.MovieActivity"></activity>
-        <activity android:name=".mine.view.activity.ReadingActivity"></activity>
-        <activity android:name=".mine.view.activity.MusicActivity"></activity>
-        <activity android:name=".mine.view.activity.LocalActivity"></activity>
-        <activity android:name=".mine.view.activity.DouBanTimeActivity"></activity>
-        <activity android:name=".mine.view.activity.DouLieActivity"></activity>
-        <activity android:name=".mine.view.activity.IndentActivity"></activity>
-        <activity android:name=".mine.view.activity.MyWalletActivity"></activity>
-        <activity android:name=".mine.view.activity.RemindActivity"></activity>
-
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".group.view.activity.DetailActivity" />
+        <activity android:name=".group.view.activity.NewEstTopicActivity" />
+        <activity android:name=".group.view.activity.PublishActivity" />
+        <activity android:name=".group.view.activity.ResponseActivity" />
+        <activity android:name=".group.view.activity.RecentlyBrowseActivity" />
+        <activity android:name=".mine.view.activity.SettingActivity" />
+        <activity android:name=".mine.view.activity.MyLikeActivity" />
+        <activity android:name=".mine.view.activity.NoteActivity" />
+        <activity android:name=".mine.view.activity.AlbumActivity" />
+        <activity android:name=".mine.view.activity.BroadCastActivity" />
+        <activity android:name=".mine.view.activity.MovieActivity" />
+        <activity android:name=".mine.view.activity.ReadingActivity" />
+        <activity android:name=".mine.view.activity.MusicActivity" />
+        <activity android:name=".mine.view.activity.LocalActivity" />
+        <activity android:name=".mine.view.activity.DouBanTimeActivity" />
+        <activity android:name=".mine.view.activity.DouLieActivity" />
+        <activity android:name=".mine.view.activity.IndentActivity" />
+        <activity android:name=".mine.view.activity.MyWalletActivity" />
+        <activity android:name=".mine.view.activity.RemindActivity" />
+        <activity android:name=".bmm.view.WebviewActivity"></activity>
     </application>
 
 </manifest>

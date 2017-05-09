@@ -94,7 +94,7 @@ public class BooklRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 //        }
             else if (position == 2) {
                 LogUtil.d("onBindViewHolder AD","2");
-                ((AdViewHolder) holder).bindViewHolder(modules.get(1).getData());
+                ((AdViewHolder) holder).bindViewHolder(modules.get(1));
             }
 //            else if (holder instanceof ShowViewHolder) {
 //            ((ShowViewHolder) holder).bindViewHolder(modules.get(2));

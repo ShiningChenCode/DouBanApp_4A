@@ -87,7 +87,7 @@ public class MusicRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
 
         } else if (holder instanceof AdViewHolder) {
-            ((AdViewHolder) holder).bindViewHolder(modules.get(1).getData());
+            ((AdViewHolder) holder).bindViewHolder(modules.get(1));
         } else if (holder instanceof ShowViewHolder) {
             ((ShowViewHolder) holder).bindViewHolder(modules.get(2));
         } else if (holder instanceof ListViewHolder) {
