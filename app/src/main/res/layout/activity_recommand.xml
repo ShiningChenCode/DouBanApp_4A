@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:focusableInTouchMode="true"
-                tools:context="com.teamwork.doubanapp_4a.group.view.GroupFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical"
+              tools:context="com.teamwork.doubanapp_4a.group.view.GroupFragment">
+
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
@@ -29,76 +30,86 @@
             android:textSize="18dp"
             />
     </RelativeLayout>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/relative"
         android:layout_weight="1">
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <LinearLayout
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <FrameLayout
-                android:id="@+id/frame"
+            >
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:background="@drawable/bg_player_default"/>
+                android:orientation="vertical">
 
-                <LinearLayout
+                <FrameLayout
+                    android:id="@+id/frame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:background="@drawable/bg_player_default"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="417668个有趣的小组"
+                            android:textColor="#000000"
+                            android:textSize="18dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="立即选择加入吧!"
+                            android:textColor="#7c7a7a"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="417668个有趣的小组"
-                        android:textColor="#000000"
-                        android:textSize="18dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="立即选择加入吧!"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="根据兴趣推荐"
                         android:textColor="#7c7a7a"
-                        android:textSize="15dp"/>
-                </LinearLayout>
+                        android:textSize="13dp"/>
+                </FrameLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ProgressBar
+                    android:id="@+id/waitbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/grouprecycleview"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="根据兴趣推荐"
-                    android:textColor="#7c7a7a"
-                    android:textSize="13dp"/>
-            </FrameLayout>
-            <!-- TODO: Update blank fragment layout -->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/grouprecycleview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:layout_below="@+id/frame"
-                >
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    android:layout_below="@+id/frame"
+                    android:background="#fff"/>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
@@ -106,8 +117,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
         android:background="#ece9e9"
+        android:orientation="vertical"
         >
 
         <View

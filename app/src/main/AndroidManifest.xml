@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".group.view.activity.RecommandActivity" />
+        <activity android:name=".group.view.view.RecommandActivity" />
         <activity
             android:name=".broadcast.view.SendBroadcastActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
@@ -37,27 +37,30 @@
         <activity android:name=".broadcast.view.BroadcastDetailActivity" />
         <activity
             android:name=".broadcast.view.EditCommentActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".group.view.activity.DetailActivity" />
-        <activity android:name=".group.view.activity.NewEstTopicActivity" />
-        <activity android:name=".group.view.activity.PublishActivity" />
-        <activity android:name=".group.view.activity.ResponseActivity" />
-        <activity android:name=".group.view.activity.RecentlyBrowseActivity" />
-        <activity android:name=".mine.view.activity.SettingActivity" />
-        <activity android:name=".mine.view.activity.MyLikeActivity" />
-        <activity android:name=".mine.view.activity.NoteActivity" />
-        <activity android:name=".mine.view.activity.AlbumActivity" />
-        <activity android:name=".mine.view.activity.BroadCastActivity" />
-        <activity android:name=".mine.view.activity.MovieActivity" />
-        <activity android:name=".mine.view.activity.ReadingActivity" />
-        <activity android:name=".mine.view.activity.MusicActivity" />
-        <activity android:name=".mine.view.activity.LocalActivity" />
-        <activity android:name=".mine.view.activity.DouBanTimeActivity" />
-        <activity android:name=".mine.view.activity.DouLieActivity" />
-        <activity android:name=".mine.view.activity.IndentActivity" />
-        <activity android:name=".mine.view.activity.MyWalletActivity" />
-        <activity android:name=".mine.view.activity.RemindActivity" />
-        <activity android:name=".bmm.view.WebviewActivity"></activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
+
+
+        <activity android:name=".group.view.view.DetailActivity"></activity>
+        <activity android:name=".group.view.view.NewEstTopicActivity"></activity>
+        <activity android:name=".group.view.view.PublishActivity"></activity>
+        <activity android:name=".group.view.view.ResponseActivity"></activity>
+        <activity android:name=".group.view.view.RecentlyBrowseActivity"></activity>
+        <activity android:name=".mine.view.activity.SettingActivity"></activity>
+        <activity android:name=".mine.view.activity.MyLikeActivity"></activity>
+        <activity android:name=".mine.view.activity.NoteActivity"></activity>
+        <activity android:name=".mine.view.activity.AlbumActivity"></activity>
+        <activity android:name=".mine.view.activity.BroadCastActivity"></activity>
+        <activity android:name=".mine.view.activity.MovieActivity"></activity>
+        <activity android:name=".mine.view.activity.ReadingActivity"></activity>
+        <activity android:name=".mine.view.activity.MusicActivity"></activity>
+        <activity android:name=".mine.view.activity.LocalActivity"></activity>
+        <activity android:name=".mine.view.activity.DouBanTimeActivity"></activity>
+        <activity android:name=".mine.view.activity.DouLieActivity"></activity>
+        <activity android:name=".mine.view.activity.IndentActivity"></activity>
+        <activity android:name=".mine.view.activity.MyWalletActivity"></activity>
+        <activity android:name=".mine.view.activity.RemindActivity"></activity>
+
+ 
     </application>
 
 </manifest>

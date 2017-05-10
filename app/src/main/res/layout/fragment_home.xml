@@ -43,58 +43,78 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/slv_container"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollY="0dp">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_failed"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="请求失败"
+                android:visibility="gone" />
 
-                <ProgressBar
-                    android:id="@+id/banner_progressbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible" />
-            </LinearLayout>
-
-            <FrameLayout
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/slv_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollY="0dp">
 
-                <ProgressBar
-                    android:id="@+id/recyler_progressbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:foregroundGravity="center"
-                    android:nestedScrollingEnabled="false" />
-            </FrameLayout>
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            android:id="@+id/banner_progressbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone" />
+
+                        <com.youth.banner.Banner
+                            android:id="@+id/banner_home"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+
+                    <ProgressBar
+                        android:id="@+id/recyler_progressbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="120dp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:foregroundGravity="center"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
         </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

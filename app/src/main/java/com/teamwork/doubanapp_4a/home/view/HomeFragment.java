@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.teamwork.doubanapp_4a.R;
 import com.teamwork.doubanapp_4a.broadcast.utils.IntentUtil;
@@ -44,16 +45,12 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     Context mContext;
     private Banner mBanner;
     private RecyclerView mRecyclerView;
-
     private NestedScrollView mScrollView;
-
     private ProgressBar mBannerProgressBar, mRecyclerProgressBar;
-
-
     private HomeDataAdapter myAdapter;
-
     private LinearLayoutManager mLinearLayoutManager;
-
+    private TextView tvFailed;
+    private SwipeRefreshLayout swiperefresh;
     private HomePresenter presenter;
 
 
@@ -88,6 +85,14 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mBanner = (Banner) view.findViewById(R.id.banner_home);
         mBannerProgressBar = (ProgressBar) view.findViewById(R.id.banner_progressbar);
         mRecyclerProgressBar = (ProgressBar) view.findViewById(R.id.recyler_progressbar);
+        tvFailed = (TextView) view.findViewById(R.id.tv_failed);
+        swiperefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        tvFailed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh();
+            }
+        });
     }
 
 
@@ -98,11 +103,19 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mLinearLayoutManager = new LinearLayoutManager(mRecyclerView.getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+        //下拉刷新
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
-    }
+                refresh();
 
-    @Override
-    public void onRefresh() {
+            }
+        });
+
+        mScrollView.setFocusable(false);
+
+        swiperefresh.setFocusable(true);
 
     }
 
@@ -158,8 +171,9 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void getBannerFailed(String msg) {
-
+        showFailed(msg);
     }
+
 
     @Override
     public void gettingHomeDatas() {
@@ -184,28 +198,50 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void getHomeDatasFailed(String msg) {
-
+        showFailed(msg);
     }
 
     private void loadingBanner() {
+        tvFailed.setVisibility(View.GONE);
         mBannerProgressBar.setVisibility(View.VISIBLE);
         mBanner.setVisibility(View.GONE);
     }
 
     private void loadingHomeDatas() {
-
+        tvFailed.setVisibility(View.GONE);
+        mRecyclerProgressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 
 
     private void showBanner() {
+        swiperefresh.setRefreshing(false);
+        tvFailed.setVisibility(View.GONE);
         mBannerProgressBar.setVisibility(View.GONE);
         mBanner.setVisibility(View.VISIBLE);
     }
 
     private void showHomeDatas() {
+        swiperefresh.setRefreshing(false);
+        tvFailed.setVisibility(View.GONE);
         mRecyclerProgressBar.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
+    private void showFailed(String msg) {
+        swiperefresh.setRefreshing(false);
+        tvFailed.setText(msg);
+        tvFailed.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    private void refresh() {
+        presenter.getBanner();
+        presenter.getHomeDatas();
+    }
 
 }

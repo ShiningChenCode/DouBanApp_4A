@@ -1,6 +1,5 @@
 package com.teamwork.doubanapp_4a.broadcast.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
-import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.model.Broadcast;
 import com.teamwork.doubanapp_4a.broadcast.model.Comment;
 import com.teamwork.doubanapp_4a.broadcast.model.Like;
 import com.teamwork.doubanapp_4a.broadcast.model.User;
+import com.teamwork.doubanapp_4a.broadcast.utils.GlideRoundTransform;
 import com.teamwork.doubanapp_4a.broadcast.utils.LogUtil;
 import com.teamwork.doubanapp_4a.broadcast.utils.dbutils.BroadcastDataHelper;
 import com.teamwork.doubanapp_4a.broadcast.view.BroadcastDetailActivity;
@@ -119,7 +118,7 @@ public class BroadcastListAdapter extends RecyclerView.Adapter<BroadcastListAdap
         holder.llBroadcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent((Activity) mContext, BroadcastDetailActivity.class);
+                Intent intent = new Intent(mContext, BroadcastDetailActivity.class);
                 intent.putExtra("broadcast_id", broadcast.getId());
                 mContext.startActivity(intent);
             }

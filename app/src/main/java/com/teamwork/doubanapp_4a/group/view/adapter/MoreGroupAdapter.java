@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamwork.doubanapp_4a.R;
-import com.teamwork.doubanapp_4a.group.view.activity.RecommandActivity;
+import com.teamwork.doubanapp_4a.group.view.view.RecommandActivity;
 import com.teamwork.doubanapp_4a.group.view.groupdata.MorelData;
 import com.teamwork.doubanapp_4a.group.view.util.CommonAdapter;
 import com.teamwork.doubanapp_4a.group.view.util.CommonViewHolder;

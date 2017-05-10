@@ -1,4 +1,4 @@
-package com.teamwork.doubanapp_4a.group.view.activity;
+package com.teamwork.doubanapp_4a.group.view.view;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
