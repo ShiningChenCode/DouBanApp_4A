@@ -51,7 +51,7 @@ public class HotDataAdapter extends RecyclerView.Adapter<HotDataAdapter.HotDataH
             @Override
             public void onClick(View v) {
                 String url1 = bean.getTarget().getUri();
-                String[] strs = url1.split("douban//");
+                String[] strs = url1.split("douban://");
                 if (strs.length > 1) {
                     url1 = strs[1];
                     url1 = "https://www." + url1;

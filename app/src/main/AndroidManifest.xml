@@ -35,6 +35,7 @@
             android:name=".broadcast.view.SearchUserActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".broadcast.view.BroadcastDetailActivity" />
+        <activity android:name=".bmm.view.WebviewActivity"></activity>
         <activity
             android:name=".broadcast.view.EditCommentActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"></activity>
@@ -60,7 +61,7 @@
         <activity android:name=".mine.view.activity.MyWalletActivity"></activity>
         <activity android:name=".mine.view.activity.RemindActivity"></activity>
 
- 
+
     </application>
 
 </manifest>
